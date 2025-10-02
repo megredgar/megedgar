@@ -19,6 +19,17 @@
       z-index: 9999;
       border-radius: 5px;
     }
+    /* Centering Fieldwork Photos */
+    #photos .row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    #photos .item {
+      max-width: 300px;
+      text-align: center;
+    }
   </style>
 </head>
 <body class="is-preload">
@@ -41,6 +52,7 @@
           <li><a href="#top" id="top-link"><span class="icon solid fa-home">Home / Accueil</span></a></li>
           <li><a href="#research" id="research-link"><span class="icon solid fa-dove">Research / Recherche</span></a></li>
           <li><a href="#publications" id="pubs-link"><span class="icon solid fa-book">Publications</span></a></li>
+          <li><a href="#photos" id="photos-link"><span class="icon solid fa-camera">Photos</span></a></li>
           <li><a href="#about" id="about-link"><span class="icon solid fa-user">About / À propos</span></a></li>
           <li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
         </ul>
@@ -115,114 +127,68 @@
   </div>
 </section>
 
-    <!-- Publications -->
-    <section id="publications" class="two">
-      <div class="container">
-        <header>
-          <h2 class="lang en active">Publications</h2>
-          <h2 class="lang fr">Publications</h2>
-        </header>
+<!-- Publications -->
+<section id="publications" class="two">
+  <div class="container">
+    <header>
+      <h2 class="lang en active">Publications</h2>
+      <h2 class="lang fr">Publications</h2>
+    </header>
 
-        <p class="lang en active">
-          Here are some of my recent works (peer-reviewed and popular article). A full list of peer-reviewed work is available on my  
-          <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank">Google Scholar profile</a>.
-        </p>
-        <p class="lang fr">
-          Voici quelques-unes de mes publications récentes (scientifiques et grand public). La liste complète de mes publications scientifiques est disponible sur mon  
-          <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank">profil Google Scholar</a>.
-        </p>
+    <p class="lang en active">
+      Here are some of my recent works (peer-reviewed and popular article). A full list of peer-reviewed work is available on my  
+      <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank">Google Scholar profile</a>.
+    </p>
+    <p class="lang fr">
+      Voici quelques-unes de mes publications récentes (scientifiques et grand public). La liste complète de mes publications scientifiques est disponible sur mon  
+      <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank">profil Google Scholar</a>.
+    </p>
 
-        <ul>
-          <!-- Springer article -->
-          <li class="lang en active">
-            Edgar, M.R., Kimmel, N. & Poesch, M.S. (2025). *Community trophic structure within reservoirs changes in the presence of invasive Chinese mystery snail (Cipangopaludina chinensis) and northern crayfish (Faxonius virilis)*. Aquatic Sciences.  
-            <a href="https://link.springer.com/article/10.1007/s00027-025-01220-z?error=cookies_not_supported&code=3f9397d5-8f46-454e-a495-07404786bcd5" target="_blank">Springer / DOI</a>
-          </li>
-          <li class="lang fr">
-            Edgar, M.R., Kimmel, N. & Poesch, M.S. (2025). *La structure trophique communautaire dans les réservoirs change en présence de l’escargot mystère chinois (Cipangopaludina chinensis) et du crayfish du Nord (Faxonius virilis)*. Aquatic Sciences.  
-            <a href="https://link.springer.com/article/10.1007/s00027-025-01220-z?error=cookies_not_supported&code=3f9397d5-8f46-454e-a495-07404786bcd5" target="_blank">Lien Springer / DOI</a>
-          </li>
+    <ul>
+      <!-- Springer article -->
+      <li class="lang en active">
+        Edgar, M.R., Kimmel, N. & Poesch, M.S. (2025). *Community trophic structure within reservoirs changes in the presence of invasive Chinese mystery snail (Cipangopaludina chinensis) and northern crayfish (Faxonius virilis)*. Aquatic Sciences.  
+        <a href="https://link.springer.com/article/10.1007/s00027-025-01220-z" target="_blank">Springer / DOI</a>
+      </li>
+      <li class="lang fr">
+        Edgar, M.R., Kimmel, N. & Poesch, M.S. (2025). *La structure trophique communautaire dans les réservoirs change en présence de l’escargot mystère chinois (Cipangopaludina chinensis) et du crayfish du Nord (Faxonius virilis)*. Aquatic Sciences.  
+        <a href="https://link.springer.com/article/10.1007/s00027-025-01220-z" target="_blank">Lien Springer / DOI</a>
+      </li>
 
-          <!-- BioInvasions PDF -->
-          <li class="lang en active">
-            Edgar, M.R., et al. (2022). *The first documented occurrence and life history characteristics of the Chinese mystery snail, Cipangopaludina chinensis (Gray, 1834) (Mollusca: Viviparidae) in Alberta, Canada*. BioInvasions Records.  
-            <a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank">PDF link</a>
-          </li>
-          <li class="lang fr">
-            Edgar, M.R., etc. (2022). *La première occurrence documentée et les caractéristiques du cycle de vie de l’escargot mystère chinois, Cipangopaludina chinensis (Gray, 1834) (Mollusca : Viviparidae) en Alberta, Canada*. BioInvasions Records.  
-            <a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank">Lien PDF</a>
-          </li>
+      <!-- BioInvasions PDF -->
+      <li class="lang en active">
+        Edgar, M.R., et al. (2022). *The first documented occurrence and life history characteristics of the Chinese mystery snail, Cipangopaludina chinensis (Gray, 1834) (Mollusca: Viviparidae) in Alberta, Canada*. BioInvasions Records.  
+        <a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank">PDF link</a>
+      </li>
+      <li class="lang fr">
+        Edgar, M.R., etc. (2022). *La première occurrence documentée et les caractéristiques du cycle de vie de l’escargot mystère chinois, Cipangopaludina chinensis (Gray, 1834) (Mollusca : Viviparidae) en Alberta, Canada*. BioInvasions Records.  
+        <a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank">Lien PDF</a>
+      </li>
 
-          <!-- Folio / UAlberta -->
-          <li class="lang en active">
-            McKinnon, D. (2022). *Containment, not eradication, key to managing invasive species in Alberta lake: study*. University of Alberta Folio.  
-            <a href="https://www.ualberta.ca/en/folio/2022/03/containment-not-eradication-key-to-managing-invasive-species-in-alberta-lake-study.html" target="_blank">Folio article</a>
-          </li>
-          <li class="lang fr">
-            McKinnon, D. (2022). *Confinement, non éradication : clé de la gestion des espèces envahissantes dans un lac de l’Alberta* (étude). Folio, Université de l’Alberta.  
-            <a href="https://www.ualberta.ca/en/folio/2022/03/containment-not-eradication-key-to-managing-invasive-species-in-alberta-lake-study.html" target="_blank">Article Folio</a>
-          </li>
+      <!-- Folio / UAlberta -->
+      <li class="lang en active">
+        McKinnon, D. (2022). *Containment, not eradication, key to managing invasive species in Alberta lake: study*. University of Alberta Folio.  
+        <a href="https://www.ualberta.ca/en/folio/2022/03/containment-not-eradication-key-to-managing-invasive-species-in-alberta-lake-study.html" target="_blank">Folio article</a>
+      </li>
+      <li class="lang fr">
+        McKinnon, D. (2022). *Confinement, non éradication : clé de la gestion des espèces envahissantes dans un lac de l’Alberta* (étude). Folio, Université de l’Alberta.  
+        <a href="https://www.ualberta.ca/en/folio/2022/03/containment-not-eradication-key-to-managing-invasive-species-in-alberta-lake-study.html" target="_blank">Article Folio</a>
+      </li>
 
-          <!-- Magazine / FlipHTML5 -->
-          <li class="lang en active">
-            Edgar, M.R., et al. (2022). *[Magazine article – Nature Alberta]*  
-            <a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank">FlipHTML5 view</a>
-          </li>
-          <li class="lang fr">
-            Edgar, M.R., etc. (2022). *[Article du magazine Nature Alberta]*  
-            <a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank">Vue FlipHTML5</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="three">
-      <div class="container">
-        <header>
-          <h2 class="lang en active">About Me</h2>
-          <h2 class="lang fr">À propos</h2>
-        </header>
-        <a href="#" class="image featured"><img src="images/pic08.png" alt="Fieldwork" /></a>
-
-        <p class="lang en active">
-          I'm a wildlife biologist and incoming PhD student at the University of Alberta. 
-          My passion lies in understanding how birds respond to environmental change in the boreal forest. 
-          Outside of research, I enjoy spending time outside (running, skiing, backpacking..aka type 2 fun), building interactive R apps, and collaborating on open science projects.
-        </p>
-      <p class="lang fr">
-  Je suis biologiste de la faune et future doctorante à l’Université de l’Alberta. 
-  Je me passionne pour la compréhension de la façon dont les oiseaux réagissent aux changements environnementaux dans la forêt boréale. 
-  En dehors de la recherche, j’aime passer du temps à l’extérieur (course à pied, ski, randonnée avec sac à dos… bref, du “plaisir de type 2”), 
-  développer des applications interactives en R et collaborer à des projets de science ouverte.
-</p>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="four">
-      <div class="container">
-        <header>
-          <h2 class="lang en active">Contact</h2>
-          <h2 class="lang fr">Contact</h2>
-        </header>
-
-        <p class="lang en active">If you'd like to collaborate, chat about birds, or ask about my work, reach out below.</p>
-        <p class="lang fr">Si vous souhaitez collaborer, discuter d’ornithologie ou en savoir plus sur mes travaux, contactez-moi ci-dessous.</p>
-
-        <form method="post" action="mailto:mredgar@ualberta.ca">
-          <div class="row">
-            <div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="Name / Nom" /></div>
-            <div class="col-6 col-12-mobile"><input type="text" name="email" placeholder="Email" /></div>
-            <div class="col-12"><textarea name="message" placeholder="Message"></textarea></div>
-            <div class="col-12"><input type="submit" value="Send / Envoyer" /></div>
-          </div>
-        </form>
-      </div>
-    </section>
+      <!-- Magazine / FlipHTML5 -->
+      <li class="lang en active">
+        Edgar, M.R., et al. (2022). *[Magazine article – Nature Alberta]*  
+        <a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank">FlipHTML5 view</a>
+      </li>
+      <li class="lang fr">
+        Edgar, M.R., etc. (2022). *[Article du magazine Nature Alberta]*  
+        <a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank">Vue FlipHTML5</a>
+      </li>
+    </ul>
   </div>
+</section>
 
-  <!-- Fieldwork Photos -->
+<!-- Fieldwork Photos -->
 <section id="photos" class="two">
   <div class="container">
     <header>
@@ -234,28 +200,79 @@
     <p class="lang fr">Un aperçu de mon travail de terrain dans les forêts boréales, les milieux humides et les lacs.</p>
 
     <div class="row">
-      <div class="col-4 col-12-mobile">
-        <article class="item">
-          <a href="images/field1.png" class="image fit"><img src="images/field1.png" alt="Bird survey in boreal forest" /></a>
-          <header><h3 class="lang en active">Boreal Bird Survey</h3><h3 class="lang fr">Relevé d’oiseaux boréaux</h3></header>
-        </article>
-      </div>
-      <div class="col-4 col-12-mobile">
-        <article class="item">
-          <a href="images/field2.png" class="image fit"><img src="images/field2.png" alt="Wetland vegetation sampling" /></a>
-          <header><h3 class="lang en active">Wetland Vegetation Sampling</h3><h3 class="lang fr">Échantillonnage de la végétation des milieux humides</h3></header>
-        </article>
-      </div>
-      <div class="col-4 col-12-mobile">
-        <article class="item">
-          <a href="images/field3.png" class="image fit"><img src="images/field3.png" alt="Lake ecosystem study" /></a>
-          <header><h3 class="lang en active">Lake Ecosystem Study</h3><h3 class="lang fr">Étude des écosystèmes lacustres</h3></header>
-        </article>
-      </div>
+      <article class="item">
+        <a href="images/field1.png" class="image fit"><img src="images/field1.png" alt="Bird survey in boreal forest" /></a>
+        <header>
+          <h3 class="lang en active">Boreal Bird Survey</h3>
+          <h3 class="lang fr">Relevé d’oiseaux boréaux</h3>
+        </header>
+      </article>
+
+      <article class="item">
+        <a href="images/field2.png" class="image fit"><img src="images/field2.png" alt="Wetland vegetation sampling" /></a>
+        <header>
+          <h3 class="lang en active">Wetland Vegetation Sampling</h3>
+          <h3 class="lang fr">Échantillonnage de la végétation des milieux humides</h3>
+        </header>
+      </article>
+
+      <article class="item">
+        <a href="images/field3.png" class="image fit"><img src="images/field3.png" alt="Lake ecosystem study" /></a>
+        <header>
+          <h3 class="lang en active">Lake Ecosystem Study</h3>
+          <h3 class="lang fr">Étude des écosystèmes lacustres</h3>
+        </header>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- About -->
+<section id="about" class="three">
+  <div class="container">
+    <header>
+      <h2 class="lang en active">About Me</h2>
+      <h2 class="lang fr">À propos</h2>
+    </header>
+    <a href="#" class="image featured"><img src="images/pic08.png" alt="Fieldwork" /></a>
+
+    <p class="lang en active">
+      I'm a wildlife biologist and incoming PhD student at the University of Alberta. 
+      My passion lies in understanding how birds respond to environmental change in the boreal forest. 
+      Outside of research, I enjoy spending time outside (running, skiing, backpacking..aka type 2 fun), building interactive R apps, and collaborating on open science projects.
+    </p>
+    <p class="lang fr">
+      Je suis biologiste de la faune et future doctorante à l’Université de l’Alberta. 
+      Je me passionne pour la compréhension de la façon dont les oiseaux réagissent aux changements environnementaux dans la forêt boréale. 
+      En dehors de la recherche, j’aime passer du temps à l’extérieur (course à pied, ski, randonnée avec sac à dos… bref, du “plaisir de type 2”), 
+      développer des applications interactives en R et collaborer à des projets de science ouverte.
+    </p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="four">
+  <div class="container">
+    <header>
+      <h2 class="lang en active">Contact</h2>
+      <h2 class="lang fr">Contact</h2>
+    </header>
+
+    <p class="lang en active">If you'd like to collaborate, chat about birds, or ask about my work, reach out below.</p>
+    <p class="lang fr">Si vous souhaitez collaborer, discuter d’ornithologie ou en savoir plus sur mes travaux, contactez-moi ci-dessous.</p>
+
+    <form method="post" action="mailto:mredgar@ualberta.ca">
+      <div class="row">
+        <div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="Name / Nom" /></div>
+        <div class="col-6 col-12-mobile"><input type="text" name="email" placeholder="Email" /></div>
+        <div class="col-12"><textarea name="message" placeholder="Message"></textarea></div>
+        <div class="col-12"><input type="submit" value="Send / Envoyer" /></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+  </div>
 
   <!-- Footer -->
   <div id="footer">
@@ -288,8 +305,3 @@
 
 </body>
 </html>
-
-
-
-
-
