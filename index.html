@@ -19,6 +19,7 @@
       z-index: 9999;
       border-radius: 5px;
     }
+
     /* Centering Fieldwork Photos */
     #photos .row {
       display: flex;
@@ -29,6 +30,26 @@
     #photos .item {
       max-width: 300px;
       text-align: center;
+    }
+
+    /* Publications: left align + bulleted links */
+    #publications .container { text-align: left; }
+
+    #publications ul {
+      text-align: left;
+      list-style-position: outside;
+      padding-left: 1.2em;
+      margin-left: 0;
+    }
+
+    /* Nested bullet list for links under each publication */
+    #publications ul.pub-links {
+      margin: 0.35em 0 0.75em 1.1em;
+      padding-left: 1.1em;
+    }
+
+    #publications ul.pub-links li {
+      margin: 0.15em 0;
     }
   </style>
 </head>
@@ -113,34 +134,45 @@
 
     <!-- Research blurb -->
     <p class="lang en active">
-      My research spans boreal songbirds, waterbirds, and the impacts of forestry and climate change on ecosystems. 
-      I integrate acoustic monitoring (ARUs), point counts, and statistical models to answer conservation questions. 
-      Beyond birds, I have also studied lake ecosystems and invasive species through the application of stable isotope analysis, 
+      My research spans boreal songbirds, waterbirds, and the impacts of forestry and climate change on ecosystems.
+      I integrate acoustic monitoring (ARUs), point counts, and statistical models to answer conservation questions.
+      Beyond birds, I have also studied lake ecosystems and invasive species through the application of stable isotope analysis,
       investigating how novel species alter aquatic food webs and ecosystem function.
     </p>
 
     <p class="lang fr">
-      Mes recherches portent sur les passereaux boréaux, les oiseaux aquatiques et les impacts de l’exploitation forestière et du changement climatique sur les écosystèmes. 
-      J’intègre le suivi acoustique (ARUs), les relevés de terrain et les modèles statistiques pour répondre à des questions de conservation. 
-      Au-delà des oiseaux, j’ai également étudié les écosystèmes lacustres et les espèces envahissantes à l’aide de l’analyse des isotopes stables, 
+      Mes recherches portent sur les passereaux boréaux, les oiseaux aquatiques et les impacts de l’exploitation forestière et du changement climatique sur les écosystèmes.
+      J’intègre le suivi acoustique (ARUs), les relevés de terrain et les modèles statistiques pour répondre à des questions de conservation.
+      Au-delà des oiseaux, j’ai également étudié les écosystèmes lacustres et les espèces envahissantes à l’aide de l’analyse des isotopes stables,
       en explorant comment les espèces nouvelles modifient les réseaux trophiques aquatiques et le fonctionnement des écosystèmes.
     </p>
 
     <!-- Interactive tools / Shiny apps -->
-    <hr />
-
     <div class="lang en active">
       <h3>Interactive tools</h3>
       <p>
-        I also build interactive R/Shiny apps to explore ecological datasets and support conservation decisions.
-        One example is the <strong>BIRDBASE Trait-space Explorer</strong>, an in-development app, which lets users investigate global
-        bird traits and functional diversity. I wanted to create this to explore the database created by Şekercioğlu et al. (2025). 
+        I build open-source tools (mostly in R/Shiny, plus some Python) to explore ecological datasets,
+        streamline bioacoustic workflows, and support conservation decisions. You can find my code,
+        reproducible analyses, and small utilities on GitHub.
       </p>
+
       <p>
-        <a href="https://meganedgar.shinyapps.io/birdbase-explorer-app/"
+        <strong>HawkEars validation app</strong> — a lightweight Shiny app I built to rapidly QA/QC acoustic recognizer outputs.
+        It lets reviewers step through clips, view spectrograms, listen to audio, and record validations (e.g., yes/no/unsure)
+        that save directly to a CSV for transparent, repeatable scoring.
+      </p>
+
+      <p>
+        <a href="https://github.com/megredgar"
            class="button"
            target="_blank" rel="noopener">
-          Open BIRDBASE Trait-space Explorer
+          Visit my GitHub
+        </a>
+
+        <a href="https://github.com/megredgar/ValidationApp"
+           class="button"
+           target="_blank" rel="noopener">
+          View the Validation App repo
         </a>
       </p>
     </div>
@@ -148,16 +180,28 @@
     <div class="lang fr">
       <h3>Outils interactifs</h3>
       <p>
-        Je développe également des applications interactives R/Shiny pour explorer des jeux de données écologiques
-        et appuyer les décisions en matière de conservation.
-        Par exemple, le <strong>BIRDBASE Trait-space Explorer</strong> permet d’examiner les traits des oiseaux
-        à l’échelle mondiale et la diversité fonctionnelle.
+        Je développe des outils open source (principalement en R/Shiny, et aussi en Python) pour explorer des jeux de données écologiques,
+        améliorer les flux de travail en bioacoustique et appuyer les décisions en conservation. Mon code et mes analyses reproductibles
+        sont disponibles sur GitHub.
       </p>
+
       <p>
-        <a href="https://meganedgar.shinyapps.io/birdbase-explorer-app/"
+        <strong>Application de validation HawkEars</strong> — une application Shiny légère que j’ai créée pour valider rapidement les sorties
+        d’un recognizer acoustique. Elle permet de parcourir des extraits, d’afficher les spectrogrammes, d’écouter l’audio et d’enregistrer
+        les validations (p. ex. oui/non/incertain) qui sont sauvegardées dans un fichier CSV.
+      </p>
+
+      <p>
+        <a href="https://github.com/megredgar"
            class="button"
            target="_blank" rel="noopener">
-          Ouvrir BIRDBASE Trait-space Explorer
+          Voir mon GitHub
+        </a>
+
+        <a href="https://github.com/megredgar/ValidationApp"
+           class="button"
+           target="_blank" rel="noopener">
+          Voir le dépôt de l’application
         </a>
       </p>
     </div>
@@ -175,43 +219,103 @@
     </header>
 
     <p class="lang en active">
-      Here are some of my recent works (peer-reviewed and popular article). A full list of peer-reviewed work is available on my  
-      <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank">Google Scholar profile</a>.
+      Here are some of my recent works (peer-reviewed and popular article). A full list of peer-reviewed work is available here:
     </p>
+    <ul class="pub-links lang en active">
+      <li>
+        <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank" rel="noopener">
+          Google Scholar profile
+        </a>
+      </li>
+    </ul>
+
     <p class="lang fr">
-      Voici quelques-unes de mes publications récentes (scientifiques et grand public). La liste complète de mes publications scientifiques est disponible sur mon  
-      <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank">profil Google Scholar</a>.
+      Voici quelques-unes de mes publications récentes (scientifiques et grand public). La liste complète de mes publications scientifiques est disponible ici :
     </p>
+    <ul class="pub-links lang fr">
+      <li>
+        <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank" rel="noopener">
+          Profil Google Scholar
+        </a>
+      </li>
+    </ul>
 
     <ul>
       <!-- Springer article -->
       <li class="lang en active">
-        Edgar, M.R., Kimmel, N. & Poesch, M.S. (2025). *Community trophic structure within reservoirs changes in the presence of invasive Chinese mystery snail (Cipangopaludina chinensis) and northern crayfish (Faxonius virilis)*. Aquatic Sciences.  
-        <a href="https://link.springer.com/article/10.1007/s00027-025-01220-z" target="_blank">Springer / DOI</a>
+        Edgar, M.R., Kimmel, N. & Poesch, M.S. (2025).
+        <em>Community trophic structure within reservoirs changes in the presence of invasive Chinese mystery snail (Cipangopaludina chinensis) and northern crayfish (Faxonius virilis)</em>.
+        Aquatic Sciences.
+        <ul class="pub-links">
+          <li>
+            <a href="https://link.springer.com/article/10.1007/s00027-025-01220-z" target="_blank" rel="noopener">
+              Springer / DOI
+            </a>
+          </li>
+        </ul>
       </li>
+
       <li class="lang fr">
-        Edgar, M.R., Kimmel, N. & Poesch, M.S. (2025). *La structure trophique communautaire dans les réservoirs change en présence de l’escargot mystère chinois (Cipangopaludina chinensis) et du crayfish du Nord (Faxonius virilis)*. Aquatic Sciences.  
-        <a href="https://link.springer.com/article/10.1007/s00027-025-01220-z" target="_blank">Lien Springer / DOI</a>
+        Edgar, M.R., Kimmel, N. & Poesch, M.S. (2025).
+        <em>La structure trophique communautaire dans les réservoirs change en présence de l’escargot mystère chinois (Cipangopaludina chinensis) et du crayfish du Nord (Faxonius virilis)</em>.
+        Aquatic Sciences.
+        <ul class="pub-links">
+          <li>
+            <a href="https://link.springer.com/article/10.1007/s00027-025-01220-z" target="_blank" rel="noopener">
+              Lien Springer / DOI
+            </a>
+          </li>
+        </ul>
       </li>
 
       <!-- BioInvasions PDF -->
       <li class="lang en active">
-        Edgar, M.R., et al. (2022). *The first documented occurrence and life history characteristics of the Chinese mystery snail, Cipangopaludina chinensis (Gray, 1834) (Mollusca: Viviparidae) in Alberta, Canada*. BioInvasions Records.  
-        <a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank">PDF link</a>
+        Edgar, M.R., et al. (2022).
+        <em>The first documented occurrence and life history characteristics of the Chinese mystery snail, Cipangopaludina chinensis (Gray, 1834) (Mollusca: Viviparidae) in Alberta, Canada</em>.
+        BioInvasions Records.
+        <ul class="pub-links">
+          <li>
+            <a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank" rel="noopener">
+              PDF link
+            </a>
+          </li>
+        </ul>
       </li>
+
       <li class="lang fr">
-        Edgar, M.R., etc. (2022). *La première occurrence documentée et les caractéristiques du cycle de vie de l’escargot mystère chinois, Cipangopaludina chinensis (Gray, 1834) (Mollusca : Viviparidae) en Alberta, Canada*. BioInvasions Records.  
-        <a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank">Lien PDF</a>
+        Edgar, M.R., etc. (2022).
+        <em>La première occurrence documentée et les caractéristiques du cycle de vie de l’escargot mystère chinois, Cipangopaludina chinensis (Gray, 1834) (Mollusca : Viviparidae) en Alberta, Canada</em>.
+        BioInvasions Records.
+        <ul class="pub-links">
+          <li>
+            <a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank" rel="noopener">
+              Lien PDF
+            </a>
+          </li>
+        </ul>
       </li>
 
       <!-- Magazine / FlipHTML5 -->
       <li class="lang en active">
-        Edgar, M.R., et al. (2022). *[Magazine article – Nature Alberta]*  
-        <a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank">FlipHTML5 view</a>
+        Edgar, M.R., et al. (2022). <em>[Magazine article – Nature Alberta]</em>
+        <ul class="pub-links">
+          <li>
+            <a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank" rel="noopener">
+              FlipHTML5 view
+            </a>
+          </li>
+        </ul>
       </li>
+
       <li class="lang fr">
-        Edgar, M.R., etc. (2022). *[Article du magazine Nature Alberta]*  
-        <a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank">Vue FlipHTML5</a>
+        Edgar, M.R., etc. (2022). <em>[Article du magazine Nature Alberta]</em>
+        <ul class="pub-links">
+          <li>
+            <a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank" rel="noopener">
+              Vue FlipHTML5
+            </a>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -266,14 +370,14 @@
     <a href="#" class="image featured"><img src="images/pic08.png" alt="Fieldwork" /></a>
 
     <p class="lang en active">
-      I'm a wildlife biologist and incoming PhD student at the University of Alberta. 
-      My passion lies in understanding how birds respond to environmental change in the boreal forest. 
+      I'm a wildlife biologist and incoming PhD student at the University of Alberta.
+      My passion lies in understanding how birds respond to environmental change in the boreal forest.
       Outside of research, I enjoy spending time outside (running, skiing, backpacking...aka type 2 fun), building interactive R apps, and collaborating on open science projects.
     </p>
     <p class="lang fr">
-      Je suis biologiste de la faune et future doctorante à l’Université de l’Alberta. 
-      Je me passionne pour la compréhension de la façon dont les oiseaux réagissent aux changements environnementaux dans la forêt boréale. 
-      En dehors de la recherche, j’aime passer du temps à l’extérieur (course à pied, ski, randonnée avec sac à dos… bref, du “plaisir de type 2”), 
+      Je suis biologiste de la faune et future doctorante à l’Université de l’Alberta.
+      Je me passionne pour la compréhension de la façon dont les oiseaux réagissent aux changements environnementaux dans la forêt boréale.
+      En dehors de la recherche, j’aime passer du temps à l’extérieur (course à pied, ski, randonnée avec sac à dos… bref, du “plaisir de type 2”),
       développer des applications interactives en R et collaborer à des projets de science ouverte.
     </p>
   </div>
@@ -334,8 +438,3 @@
 
 </body>
 </html>
-
-
-
-
-
