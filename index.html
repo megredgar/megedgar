@@ -234,7 +234,7 @@
     .catalogue .yr small { display: block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); margin-top: 4px; }
     .catalogue .title { font-family: var(--serif); font-size: 1.1rem; line-height: 1.4; }
     .catalogue .meta { color: var(--ink-2); font-size: 0.9rem; margin-top: 4px; }
-    .catalogue .link { font-size: 0.88rem; font-weight: 600; margin-top: 8px; display: inline-block; }
+    .catalogue .link { font-size: 0.88rem; font-weight: 600; margin-top: 8px; display: inline-block; overflow-wrap: anywhere; }
     .subhead { font-family: var(--mono); font-size: 0.72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--moss); margin: 48px 0 0; padding-bottom: 12px; }
 
     /* about */
@@ -350,7 +350,7 @@
         </p>
         <div class="reveal">
           <div class="en">
-            <p class="lead">I'm a PhD student at the University of Alberta and a graduate student with the Boreal Avian Modelling (BAM) Centre. I study boreal waterbirds — how their ranges are shifting as the climate warms, how they respond to wildfire, and what they can tell us about the health of boreal wetlands.</p>
+            <p class="lead">I'm a PhD student at the University of Alberta and a graduate student with the Boreal Avian Modelling (BAM) Project. I study boreal waterbirds — how their ranges are shifting as the climate warms, how they respond to wildfire, and what they can tell us about the health of boreal wetlands.</p>
             <p class="lead">Waterfowl and shorebirds already have some of the best long-term survey data of any birds. My work brings those surveys together with <strong>autonomous recording units (ARUs)</strong> — and tests whether acoustic data are enough — so we can answer ecological questions across the whole boreal.</p>
           </div>
           <div class="fr">
@@ -584,11 +584,13 @@
             <h4><span class="en">Acoustic Localization of Boreal Birds</span><span class="fr">Localisation acoustique des oiseaux boréaux</span></h4>
             <p class="en">Using spatially-distributed ARU arrays to localize individual birds in 3D space, combining HawkEars CNN detections with <a href="https://opensoundscape.org" target="_blank" rel="noopener">OpenSoundscape</a> localization algorithms (Lapp et al. 2023).</p>
             <p class="fr">Utilisation de réseaux d'ARU distribués spatialement pour localiser des oiseaux individuels en 3D, en combinant les détections CNN de HawkEars avec les algorithmes de localisation d'<a href="https://opensoundscape.org" target="_blank" rel="noopener">OpenSoundscape</a> (Lapp et al. 2023).</p>
+            <p class="en" style="margin-top:12px">The first dataset is now openly available: <a href="https://doi.org/10.6073/pasta/a0e8761a36bd1dd19663d995e0d2acb2" target="_blank" rel="noopener"><em>DataLoca: Manitoba Interlakes</em></a>, multi-species localizations of boreal songbirds from a synchronized ARU array north of Hecla Provincial Park, Manitoba (May 2025), published with Steve Van Wilgenburg on the Environmental Data Initiative.</p>
+            <p class="fr" style="margin-top:12px">Le premier jeu de données est maintenant en libre accès : <a href="https://doi.org/10.6073/pasta/a0e8761a36bd1dd19663d995e0d2acb2" target="_blank" rel="noopener"><em>DataLoca: Manitoba Interlakes</em></a>, des localisations multi-espèces de passereaux boréaux issues d'un réseau d'ARU synchronisées au nord du parc provincial Hecla, au Manitoba (mai 2025), publié avec Steve Van Wilgenburg sur l'Environmental Data Initiative.</p>
             <figure class="plate">
               <img src="images/localization.jpg" alt="Map of localized boreal bird detections from an ARU array" loading="lazy" />
               <figcaption><span class="en">Plate 1 — Localized detections from an ARU array.</span><span class="fr">Planche 1 — Détections localisées à partir d'un réseau d'ARU.</span></figcaption>
             </figure>
-            <div class="tags"><span class="tag">OpenSoundscape</span><span class="tag">HawkEars</span><span class="tag"><span class="en">Methods paper</span><span class="fr">Article méthodologique</span></span></div>
+            <div class="tags"><span class="tag">OpenSoundscape</span><span class="tag">HawkEars</span><span class="tag"><span class="en">Open data</span><span class="fr">Données ouvertes</span></span><span class="tag"><span class="en">Methods paper</span><span class="fr">Article méthodologique</span></span></div>
           </div>
         </article>
       </div>
@@ -644,6 +646,14 @@
       </div>
 
       <ul class="catalogue reveal">
+        <li>
+          <div class="yr">2026<small><span class="en">Dataset · EDI</span><span class="fr">Données · EDI</span></small></div>
+          <div>
+            <p class="title">DataLoca: Manitoba Interlakes. <span class="en">Multi-species acoustic localizations of boreal songbird vocalizations from a synchronized ARU array north of Hecla Provincial Park, Manitoba, Canada (May 2025)</span><span class="fr">Localisations acoustiques multi-espèces de vocalisations de passereaux boréaux à partir d'un réseau d'ARU synchronisées au nord du parc provincial Hecla, Manitoba, Canada (mai 2025)</span></p>
+            <p class="meta">Edgar, M. &amp; Van Wilgenburg, S. — <em>Environmental Data Initiative</em>, ver 1</p>
+            <a class="link" href="https://doi.org/10.6073/pasta/a0e8761a36bd1dd19663d995e0d2acb2" target="_blank" rel="noopener">doi:10.6073/pasta/a0e8761a36bd1dd19663d995e0d2acb2 →</a>
+          </div>
+        </li>
         <li>
           <div class="yr">2025<small>Aquatic Sciences</small></div>
           <div>
