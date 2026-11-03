@@ -119,7 +119,8 @@
       box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 30px 60px -30px rgba(31,42,36,.35);
       background: #dfe3dc;
     }
-    .diorama svg { display: block; width: 100%; height: auto; }
+    .diorama img { display: block; width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: center; }
+    @media (max-width: 640px) { .diorama img { aspect-ratio: 4 / 3; } }
     .diorama::after { /* glass sheen */
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background: linear-gradient(115deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 38%, rgba(255,255,255,0) 70%, rgba(255,255,255,.08) 100%);
@@ -288,10 +289,7 @@
       html { scroll-behavior: auto; }
       html.js .reveal { opacity: 1; transform: none; transition: none; }
       .label, .label:hover { transition: none; transform: none; }
-      .flock { animation: none !important; }
     }
-    .flock { animation: drift 26s ease-in-out infinite alternate; }
-    @keyframes drift { from { transform: translate(0,0); } to { transform: translate(40px,-10px); } }
 
     /* responsive */
     @media (max-width: 960px) {
@@ -350,7 +348,7 @@
         </p>
         <div class="reveal">
           <div class="en">
-            <p class="lead">I'm a PhD student at the University of Alberta and a graduate student with the Boreal Avian Modelling (BAM) Centre. I study boreal waterbirds — how their ranges are shifting as the climate warms, how they respond to wildfire, and what they can tell us about the health of boreal wetlands.</p>
+            <p class="lead">I'm a PhD student at the University of Alberta and a graduate student with the Boreal Avian Modelling (BAM) Project. I study boreal waterbirds — how their ranges are shifting as the climate warms, how they respond to wildfire, and what they can tell us about the health of boreal wetlands.</p>
             <p class="lead">Waterfowl and shorebirds already have some of the best long-term survey data of any birds. My work brings those surveys together with <strong>autonomous recording units (ARUs)</strong> — and tests whether acoustic data are enough — so we can answer ecological questions across the whole boreal.</p>
           </div>
           <div class="fr">
@@ -364,40 +362,11 @@
         </div>
       </div>
 
-      <!-- Diorama -->
-      <figure class="diorama reveal" aria-label="Illustrated boreal wetland at dusk with a flight of ducks">
-        <svg id="diorama" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" role="img">
-          <defs>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0"   stop-color="#b9c7c6"/>
-              <stop offset=".55" stop-color="#e6d9c3"/>
-              <stop offset="1"   stop-color="#f1d9bd"/>
-            </linearGradient>
-            <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#cdbfa6"/>
-              <stop offset="1" stop-color="#7f8f86"/>
-            </linearGradient>
-            <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0" stop-color="#fbe8cf" stop-opacity="1"/>
-              <stop offset="1" stop-color="#fbe8cf" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <rect width="1200" height="460" fill="url(#sky)"/>
-          <circle cx="840" cy="300" r="190" fill="url(#sun)"/>
-          <circle cx="840" cy="300" r="34" fill="#f8e3c6" opacity=".9"/>
-          <!-- distant hills -->
-          <path d="M0 300 C 160 270, 300 290, 440 276 S 760 262, 900 280 S 1100 268, 1200 282 L1200 320 L0 320Z" fill="#a8b2a4" opacity=".7"/>
-          <g id="trees-far"></g>
-          <g id="trees-mid"></g>
-          <!-- water -->
-          <rect y="318" width="1200" height="142" fill="url(#water)"/>
-          <g id="ripples" stroke="#f3e6d2" stroke-linecap="round" opacity=".55"></g>
-          <g id="trees-near"></g>
-          <g id="reeds" stroke="#28392f" stroke-linecap="round" fill="none"></g>
-          <g class="flock" id="flock" fill="#2a352f"></g>
-        </svg>
+      <!-- Field photo -->
+      <figure class="diorama reveal">
+        <img src="images/field1.png" alt="Fieldwork in the boreal" />
         <figcaption class="case-label">
-          <span class="mono"><span class="en">Diorama · Boreal wetland at dusk</span><span class="fr">Diorama · Milieu humide boréal au crépuscule</span></span>
+          <span class="mono"><span class="en">In the field</span><span class="fr">Sur le terrain</span></span>
           <p><span class="en">Decades of waterbird surveys, and thousands of ARUs listening across the boreal. The question is how to use them together.</span><span class="fr">Des décennies d'inventaires d'oiseaux aquatiques et des milliers d'ARU à l'écoute dans la forêt boréale. Reste à savoir comment les utiliser ensemble.</span></p>
         </figcaption>
         <div class="spec-tag" aria-hidden="true">
@@ -823,67 +792,6 @@
     try { saved = localStorage.getItem("mre-lang"); } catch (e) {}
     setLang(saved === "fr" ? "fr" : "en");
     btn.addEventListener("click", () => setLang(root.getAttribute("data-lang") === "en" ? "fr" : "en"));
-  })();
-
-  /* ── Diorama ── */
-  (function () {
-    const NS = "http://www.w3.org/2000/svg";
-    let seed = 11;
-    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    const el = (tag, attrs, parent) => {
-      const n = document.createElementNS(NS, tag);
-      for (const k in attrs) n.setAttribute(k, attrs[k]);
-      parent.appendChild(n); return n;
-    };
-
-    // Black spruce silhouette: narrow, tiered, slightly ragged
-    function spruce(x, base, h, w) {
-      const t = 7 + Math.floor(rnd() * 4), R = [];
-      for (let i = 1; i <= t; i++) {
-        const y = base - h + (h * i) / t;
-        const ww = w * (0.25 + 0.75 * i / t) * (0.8 + rnd() * 0.4);
-        R.push([x + ww, y]);
-        if (i < t) R.push([x + ww * 0.3, y + 1.5]);
-      }
-      const pts = [[x, base - h - 6], ...R, [x + w * 0.07, base], [x - w * 0.07, base],
-        ...R.slice().reverse().map(([px, py]) => [2 * x - px + (rnd() - 0.5) * 2, py])];
-      return pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
-    }
-    function forest(id, base, hMin, hMax, n, color, gapFrom, gapTo) {
-      const g = document.getElementById(id);
-      for (let i = 0; i < n; i++) {
-        const x = rnd() * 1220 - 10;
-        if (x > gapFrom && x < gapTo && rnd() < 0.85) continue;
-        const h = hMin + rnd() * (hMax - hMin);
-        el("polygon", { points: spruce(x, base + rnd() * 4, h, h * 0.14), fill: color }, g);
-      }
-    }
-    forest("trees-far", 304, 26, 50, 140, "#8b998b", 700, 980);
-    forest("trees-mid", 320, 50, 95, 70, "#5e7266", 640, 1040);
-    forest("trees-near", 470, 170, 300, 9, "#26372d", 260, 1120);
-
-    // Ripples (reflection of the sun)
-    const rip = document.getElementById("ripples");
-    for (let i = 0; i < 28; i++) {
-      const y = 326 + i * 4.6, w = 90 - i * 2.2 + rnd() * 30, x = 840 - w / 2 + (rnd() - 0.5) * 40;
-      el("line", { x1: x, y1: y, x2: x + w, y2: y, "stroke-width": 1.2 + rnd() }, rip);
-    }
-    // Reeds / sedges in foreground
-    const reeds = document.getElementById("reeds");
-    for (let i = 0; i < 90; i++) {
-      const x = 380 + rnd() * 820, h = 30 + rnd() * 70, lean = (rnd() - 0.4) * 22;
-      el("path", { d: `M${x} 462 Q${x + lean * 0.3} ${462 - h * 0.6} ${x + lean} ${462 - h}`, "stroke-width": 1 + rnd() * 1.3 }, reeds);
-    }
-    // Flight of ducks (side view, wings raised)
-    const flock = document.getElementById("flock");
-    const birds = [[300,120,1],[340,134,.92],[380,148,.86],[262,138,.9],[224,156,.84],[420,160,.8],[186,172,.78]];
-    birds.forEach(([x, y, s], i) => {
-      const g = el("g", { transform: `translate(${x} ${y}) scale(${s * 1.25})` }, flock);
-      el("ellipse", { cx: 0, cy: 0, rx: 14, ry: 4.2 }, g);              // body
-      el("path", { d: "M10 -1 Q16 -3 20 -2 L25 -1 L20 0.8 Q15 1.2 10 2Z" }, g); // neck, head, bill
-      const up = i % 2 === 0;
-      el("path", { d: up ? "M-6 -2 L2 -17 L6 -2Z" : "M-6 1 L1 13 L6 1Z", opacity: .95 }, g); // wing
-    });
   })();
 
   /* ── Reveal on scroll ── */
