@@ -1,800 +1,892 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
 <head>
-  <title>Megan R. Edgar | Boreal Bird Ecology</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Megan R. Edgar | Boreal Bird Ecology</title>
+  <meta name="description" content="Megan R. Edgar — PhD candidate at the University of Alberta studying how we monitor boreal waterbirds and how they respond to landscape change." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --pink:        #f2b8c6;
-      --pink-light:  #fce8ee;
-      --pink-dark:   #d97fa0;
-      --olive:       #7a8c3f;
-      --olive-dark:  #5a6830;
-      --olive-light: #c8d49a;
-      --cream:       #fdf6ec;
-      --brown:       #4a3728;
-      --text:        #2e2418;
-      --muted:       #7a6a5a;
-      --white:       #ffffff;
-      --shadow:      0 4px 20px rgba(74,55,40,0.12);
+      --paper:   #f5f1e8;
+      --paper-2: #ece5d6;
+      --card:    #fbf9f4;
+      --ink:     #1f2a24;
+      --ink-2:   #56605a;
+      --rule:    #d6cdb9;
+      --spruce:  #2f4a3a;
+      --moss:    #6b7a3c;
+      --tag:     #eadcb6;
+      --tag-ink: #6a5426;
+      --rose:    #b36a7d;
+
+      --serif: "Fraunces", Georgia, serif;
+      --sans:  "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --mono:  "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+      --wrap: 1120px;
+      --radius: 6px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
     body {
-      font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", cursive;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 16px;
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--olive-dark); text-decoration: underline dotted; transition: color 0.2s; }
-    a:hover { color: var(--pink-dark); }
-    h1, h2, h3, h4 {
-      font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", cursive;
-      font-weight: bold;
-      line-height: 1.3;
-    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--spruce); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--rose); }
+    em, .latin { font-style: italic; }
 
-    .lang { display: none; }
-    .lang.active { display: block; }
-    .lang-inline { display: none; }
-    .lang-inline.active { display: inline; }
+    /* language toggle */
+    html:not([data-lang="fr"]) .fr { display: none !important; }
+    html[data-lang="fr"] .en { display: none !important; }
 
-    #language-toggle {
-      position: fixed;
-      top: 14px; right: 14px;
-      background: var(--olive);
-      color: var(--white);
-      border: 3px solid var(--olive-dark);
-      padding: 6px 16px;
-      cursor: pointer;
-      z-index: 9999;
-      border-radius: 20px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      font-weight: bold;
-      transition: background 0.2s;
-      box-shadow: 3px 3px 0 var(--olive-dark);
-    }
-    #language-toggle:hover { background: var(--olive-dark); }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 28px; }
+    .mono { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
-    #sidebar {
-      position: fixed;
-      left: 0; top: 0;
-      width: 240px;
-      height: 100vh;
-      background: linear-gradient(180deg, var(--pink-light) 0%, #f0dfe8 100%);
-      border-right: 3px dashed var(--pink-dark);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem 1rem;
-      z-index: 100;
-      overflow-y: auto;
+    /* ───────── top bar ───────── */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(245,241,232,0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
     }
-    #sidebar .avatar-wrap {
-      width: 110px; height: 110px;
-      border-radius: 50%;
-      border: 4px solid var(--pink-dark);
-      background: var(--pink);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 0.8rem;
-      font-size: 3rem;
-      box-shadow: 4px 4px 0 var(--pink-dark);
+    .topbar .wrap { display: flex; align-items: center; gap: 24px; height: 60px; }
+    .brand {
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 500;
+      color: var(--ink); text-decoration: none; white-space: nowrap;
     }
-    #sidebar h1 { font-size: 1.1rem; color: var(--brown); text-align: center; margin-bottom: 0.25rem; }
-    #sidebar .subtitle { font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1.5rem; line-height: 1.4; }
-    #sidebar nav ul { list-style: none; width: 100%; }
-    #sidebar nav ul li { margin-bottom: 0.3rem; }
-    #sidebar nav ul li a {
-      display: block;
-      padding: 0.45rem 0.9rem;
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--brown);
-      font-size: 0.88rem;
-      font-weight: bold;
-      transition: background 0.15s, color 0.15s;
-      border: 2px solid transparent;
+    .brand span { color: var(--moss); font-style: italic; }
+    .nav { display: flex; gap: 22px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      color: var(--ink-2); text-decoration: none; font-size: 0.9rem; font-weight: 500; white-space: nowrap;
+      padding: 4px 0; border-bottom: 1.5px solid transparent;
     }
-    #sidebar nav ul li a:hover { background: var(--olive-light); border-color: var(--olive); color: var(--olive-dark); }
+    .nav a:hover { color: var(--ink); border-color: var(--moss); }
+    #lang-toggle {
+      font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em;
+      background: transparent; color: var(--spruce);
+      border: 1px solid var(--spruce); border-radius: 999px;
+      padding: 5px 12px; cursor: pointer; flex-shrink: 0;
+    }
+    #lang-toggle:hover { background: var(--spruce); color: var(--paper); }
 
-    .social-icons {
-      display: flex; gap: 12px;
-      margin-top: auto;
-      padding-top: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+    /* ───────── hero ───────── */
+    .hero { padding: 72px 0 40px; }
+    .eyebrow { color: var(--moss); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--moss); }
+    .hero h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(2.8rem, 7vw, 5.6rem); line-height: 1.02; letter-spacing: -0.02em;
+      font-variation-settings: "opsz" 144;
     }
-    .social-icons a {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--olive);
-      color: white;
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none;
-      font-size: 1rem;
-      border: 2px solid var(--olive-dark);
-      box-shadow: 2px 2px 0 var(--olive-dark);
-      transition: background 0.2s;
+    .hero h1 em { color: var(--spruce); font-weight: 300; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: end; margin-top: 28px; }
+    .tagline {
+      font-family: var(--serif); font-style: italic; font-weight: 300;
+      font-size: clamp(1.25rem, 2.2vw, 1.6rem); line-height: 1.35; color: var(--ink);
     }
-    .social-icons a:hover { background: var(--pink-dark); border-color: var(--pink-dark); box-shadow: 2px 2px 0 var(--brown); }
-
-    #main { margin-left: 240px; min-height: 100vh; }
-    section { padding: 4rem 3rem; position: relative; }
-    section:nth-child(even) { background: var(--white); }
-
-    .section-label {
-      display: inline-block;
-      background: var(--pink);
-      color: var(--brown);
-      font-size: 0.75rem;
-      font-weight: bold;
-      padding: 3px 12px;
-      border-radius: 20px;
-      border: 2px solid var(--pink-dark);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    section h2 {
-      font-size: 2rem;
-      color: var(--olive-dark);
-      margin-bottom: 1.5rem;
-      position: relative;
-      display: inline-block;
-    }
-    section h2::after {
-      content: '';
-      display: block;
-      height: 4px;
-      background: linear-gradient(90deg, var(--pink), var(--olive-light));
-      border-radius: 2px;
-      margin-top: 6px;
-    }
-    section h3 { color: var(--brown); font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
-    section p { max-width: 720px; margin-bottom: 1rem; color: var(--text); }
-
-    #hero {
-      background: linear-gradient(135deg, #fce8ee 0%, #e8f0d4 50%, #f5e8ec 100%);
-      min-height: 92vh;
-      display: flex;
-      align-items: center;
-      padding: 5rem 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-    #hero::before { content: '🐦'; position: absolute; font-size: 8rem; opacity: 0.08; top: 10%; right: 8%; transform: rotate(-15deg); }
-    #hero::after  { content: '🌿'; position: absolute; font-size: 6rem; opacity: 0.1; bottom: 12%; right: 15%; transform: rotate(10deg); }
-    .hero-inner { max-width: 680px; }
-    .hero-tag {
-      display: inline-block;
-      background: var(--olive);
-      color: white;
-      font-size: 0.8rem;
-      font-weight: bold;
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 1rem;
-      border: 2px solid var(--olive-dark);
-      box-shadow: 3px 3px 0 var(--olive-dark);
-    }
-    #hero h2 { font-size: 2.8rem; color: var(--brown); margin-bottom: 1.2rem; line-height: 1.2; }
-    #hero h2::after { display: none; }
-    #hero h2 .highlight { color: var(--olive-dark); position: relative; }
-    #hero h2 .highlight::after {
-      content: ''; position: absolute; left: 0; bottom: 2px;
-      width: 100%; height: 6px; background: var(--pink); z-index: -1; border-radius: 2px;
-    }
-    #hero .lead { font-size: 1.1rem; color: var(--muted); max-width: 580px; margin-bottom: 2rem; }
-
+    .lead { color: var(--ink-2); margin-top: 0; }
+    .lead + .lead { margin-top: 14px; }
+    .lead strong { color: var(--ink); font-weight: 600; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
     .btn {
-      display: inline-block;
-      padding: 0.6rem 1.4rem;
-      border-radius: 25px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: 3px solid transparent;
-      margin: 0.3rem 0.3rem 0.3rem 0;
-      box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 999px;
+      font-size: 0.92rem; font-weight: 600; text-decoration: none;
+      transition: background .2s, color .2s, border-color .2s;
     }
-    .btn-primary { background: var(--olive); color: white; border-color: var(--olive-dark); box-shadow: 3px 3px 0 var(--olive-dark); }
-    .btn-primary:hover { background: var(--olive-dark); color: white; transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--olive-dark); }
-    .btn-secondary { background: var(--pink); color: var(--brown); border-color: var(--pink-dark); box-shadow: 3px 3px 0 var(--pink-dark); }
-    .btn-secondary:hover { background: var(--pink-dark); color: white; transform: translate(-1px,-1px); }
+    .btn-solid { background: var(--spruce); color: var(--paper); border: 1px solid var(--spruce); }
+    .btn-solid:hover { background: var(--ink); color: var(--paper); }
+    .btn-line { border: 1px solid var(--ink-2); color: var(--ink); }
+    .btn-line:hover { border-color: var(--rose); color: var(--rose); }
 
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-    .card { background: var(--cream); border: 3px solid var(--pink); border-radius: 18px; padding: 1.4rem; box-shadow: 4px 4px 0 var(--pink-dark); transition: transform 0.15s; }
-    .card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--pink-dark); }
-    .card-icon { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
-    .card h4 { color: var(--olive-dark); margin-bottom: 0.5rem; font-size: 1rem; }
-    .card p { font-size: 0.85rem; color: var(--muted); margin: 0; }
-
-    .project-list { list-style: none; margin-top: 1rem; }
-    .project-list li {
-      display: flex; align-items: flex-start; gap: 1rem;
-      background: white; border: 3px solid var(--olive-light);
-      border-radius: 14px; padding: 1.1rem 1.3rem; margin-bottom: 1rem;
-      box-shadow: 3px 3px 0 var(--olive); transition: transform 0.15s;
+    /* diorama case */
+    .diorama {
+      position: relative; margin-top: 56px;
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--rule);
+      box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 30px 60px -30px rgba(31,42,36,.35);
+      background: #dfe3dc;
     }
-    .project-list li:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--olive); }
-    .project-list .proj-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
-    .project-list .proj-body h4 { color: var(--olive-dark); font-size: 0.95rem; margin-bottom: 0.2rem; }
-    .project-list .proj-body p { font-size: 0.82rem; color: var(--muted); margin: 0; }
-    .proj-tag {
-      display: inline-block; font-size: 0.68rem;
-      background: var(--pink-light); color: var(--pink-dark);
-      border: 1.5px solid var(--pink-dark); border-radius: 10px;
-      padding: 1px 8px; margin-top: 0.35rem; margin-right: 0.2rem;
+    .diorama svg { display: block; width: 100%; height: auto; }
+    .diorama::after { /* glass sheen */
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(115deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 38%, rgba(255,255,255,0) 70%, rgba(255,255,255,.08) 100%);
     }
-
-    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem; }
-    .skill-chip { background: var(--pink-light); border: 2px solid var(--pink-dark); border-radius: 20px; padding: 0.35rem 1rem; font-size: 0.82rem; font-weight: bold; color: var(--brown); }
-    .skill-chip.olive { background: #e8f0d4; border-color: var(--olive); color: var(--olive-dark); }
-
-    .pub-list { list-style: none; margin-top: 1rem; }
-    .pub-list li { border-left: 5px solid var(--pink); background: white; padding: 1rem 1.2rem; margin-bottom: 1rem; border-radius: 0 12px 12px 0; box-shadow: 2px 2px 0 var(--pink-dark); }
-    .pub-list .pub-title { font-style: italic; color: var(--brown); font-size: 0.92rem; }
-    .pub-list .pub-meta { font-size: 0.8rem; color: var(--muted); margin: 0.3rem 0; }
-    .pub-list .pub-links a { display: inline-block; margin-right: 0.6rem; font-size: 0.78rem; font-weight: bold; color: var(--olive-dark); }
-
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 1rem; }
-    .about-list { list-style: none; }
-    .about-list li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.9rem; }
-    .about-list li::before { content: '🌿'; position: absolute; left: 0; }
-
-    #contact { background: linear-gradient(135deg, #fce8ee 0%, #e8f0d4 100%); }
-    .contact-box { background: white; border: 3px solid var(--pink); border-radius: 20px; padding: 2rem; max-width: 520px; box-shadow: 5px 5px 0 var(--pink-dark); }
-    .contact-box p { font-size: 0.9rem; margin-bottom: 1.2rem; }
-    .contact-method { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; font-size: 0.9rem; }
-    .contact-method .icon { width: 38px; height: 38px; border-radius: 50%; background: var(--olive-light); border: 2px solid var(--olive); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-
-    footer { margin-left: 240px; background: var(--brown); color: #c8b8a8; text-align: center; padding: 1.2rem; font-size: 0.8rem; }
-    footer a { color: var(--pink); }
-
-    @media (max-width: 860px) {
-      #sidebar { display: none; }
-      #main, footer { margin-left: 0; }
-      #hero { min-height: auto; padding: 5rem 1.5rem 3rem; }
-      section { padding: 3rem 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; }
+    .case-label {
+      position: absolute; left: 22px; bottom: 20px;
+      background: var(--card); border: 1px solid var(--rule); border-radius: 4px;
+      padding: 12px 16px; max-width: 320px;
+      box-shadow: 0 8px 20px -10px rgba(0,0,0,.35);
     }
+    .case-label .mono { color: var(--ink-2); font-size: 0.66rem; }
+    .case-label p { font-family: var(--serif); font-size: 0.98rem; line-height: 1.35; margin-top: 4px; }
 
-    @keyframes floatBird { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
-    .float { animation: floatBird 4s ease-in-out infinite; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .fade-in   { animation: fadeUp 0.6s ease forwards; }
-    .fade-in-2 { animation: fadeUp 0.6s 0.15s ease both; }
-    .fade-in-3 { animation: fadeUp 0.6s 0.3s  ease both; }
+    .spec-tag {
+      position: absolute; right: 26px; top: 22px;
+      background: var(--tag); color: var(--tag-ink);
+      padding: 12px 16px 12px 30px; border-radius: 3px;
+      font-family: var(--mono); font-size: 0.68rem; line-height: 1.6; letter-spacing: .04em;
+      transform: rotate(3deg);
+      box-shadow: 0 6px 14px -8px rgba(0,0,0,.45);
+      clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%);
+    }
+    .spec-tag::before { /* eyelet */
+      content: ""; position: absolute; left: 12px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px;
+      border-radius: 50%; background: #dfe3dc; box-shadow: 0 0 0 1.5px #b9a678;
+    }
+    .spec-tag b { font-weight: 500; color: #3d3015; }
+
+    /* ───────── halls (sections) ───────── */
+    section.hall { padding: 96px 0; border-top: 1px solid var(--rule); }
+    section.hall.alt { background: var(--paper-2); }
+    .hall-head { display: grid; grid-template-columns: 200px 1fr; gap: 32px; margin-bottom: 48px; }
+    .hall-no { color: var(--moss); padding-top: 12px; }
+    .hall-no b { display: block; font-family: var(--serif); font-size: 2.6rem; font-weight: 300; color: var(--ink); letter-spacing: 0; text-transform: none; line-height: 1; margin-top: 6px; }
+    .hall-head h2 {
+      font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1; letter-spacing: -0.015em;
+    }
+    .hall-intro { max-width: 680px; color: var(--ink-2); margin-top: 16px; }
+    .hall-intro + .hall-intro { margin-top: 12px; }
+    .hall-intro strong { color: var(--ink); font-weight: 600; }
+
+    /* specimen label cards */
+    .labels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .label {
+      position: relative; background: var(--card);
+      border: 1px solid var(--rule); border-radius: var(--radius);
+      padding: 22px 22px 24px;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .label::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--moss); border-radius: var(--radius) var(--radius) 0 0; opacity: .7; }
+    .label:hover { transform: translateY(-3px); box-shadow: 0 18px 30px -22px rgba(31,42,36,.5); }
+    .label-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .label-top .mono { color: var(--ink-2); font-size: 0.68rem; }
+    .label svg { width: 30px; height: 30px; stroke: var(--spruce); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+    .label h3 { font-family: var(--serif); font-weight: 500; font-size: 1.22rem; line-height: 1.25; margin-bottom: 8px; }
+    .label p { font-size: 0.92rem; color: var(--ink-2); line-height: 1.6; }
+
+    /* field kit */
+    .kit { margin-top: 56px; display: grid; grid-template-columns: 200px 1fr; gap: 32px; }
+    .kit h3 { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; }
+    .kit .mono { color: var(--moss); display: block; margin-bottom: 6px; }
+    .kit-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .kit-group h4 { font-family: var(--mono); font-size: 0.7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); font-weight: 500; margin-bottom: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 0.84rem; padding: 5px 12px; border-radius: 999px;
+      border: 1px solid var(--rule); background: var(--card); color: var(--ink);
+    }
+    .chip.dark { background: var(--spruce); border-color: var(--spruce); color: var(--paper); }
+
+    /* exhibits (projects) */
+    .gallery-title { display: flex; align-items: baseline; gap: 14px; margin: 8px 0 22px; }
+    .gallery-title h3 { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; }
+    .gallery-title .mono { color: var(--moss); }
+    .gallery-title + .exhibits { margin-bottom: 64px; }
+    .exhibits { display: grid; gap: 18px; }
+    .exhibit {
+      display: grid; grid-template-columns: 200px 1fr; gap: 32px;
+      background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius);
+      padding: 30px 32px;
+    }
+    .exhibit-meta .mono { color: var(--ink-2); font-size: 0.68rem; display: block; }
+    .exhibit-meta .no { font-family: var(--serif); font-size: 2.2rem; font-weight: 300; line-height: 1; margin: 6px 0 12px; color: var(--spruce); }
+    .exhibit-meta .latin { font-family: var(--serif); font-size: 0.95rem; color: var(--ink-2); }
+    .exhibit h4 { font-family: var(--serif); font-weight: 500; font-size: 1.4rem; line-height: 1.25; margin-bottom: 10px; }
+    .exhibit p { color: var(--ink-2); font-size: 0.97rem; max-width: 720px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag {
+      position: relative; font-family: var(--mono); font-size: 0.68rem; letter-spacing: .05em;
+      background: var(--tag); color: var(--tag-ink);
+      padding: 4px 10px 4px 18px; border-radius: 2px;
+      clip-path: polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 50%);
+    }
+    .tag::before { content: ""; position: absolute; left: 7px; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: var(--card); }
+    .plate { margin-top: 22px; max-width: 560px; }
+    .plate img { border-radius: 4px; border: 1px solid var(--rule); background: var(--paper-2); }
+    .plate figcaption { font-size: 0.8rem; color: var(--ink-2); margin-top: 8px; font-style: italic; font-family: var(--serif); }
+
+    /* tools */
+    .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .tool { border-top: 2px solid var(--spruce); padding-top: 18px; }
+    .tool .mono { color: var(--moss); font-size: 0.68rem; }
+    .tool h3 { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; margin: 6px 0 8px; line-height: 1.25; }
+    .tool p { color: var(--ink-2); font-size: 0.93rem; }
+    .tool a.more { display: inline-block; margin-top: 12px; font-weight: 600; font-size: 0.9rem; }
+
+    /* publications */
+    .catalogue { list-style: none; border-top: 1px solid var(--rule); }
+    .catalogue li { display: grid; grid-template-columns: 120px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--rule); }
+    .catalogue .yr { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--spruce); line-height: 1.2; }
+    .catalogue .yr small { display: block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); margin-top: 4px; }
+    .catalogue .title { font-family: var(--serif); font-size: 1.1rem; line-height: 1.4; }
+    .catalogue .meta { color: var(--ink-2); font-size: 0.9rem; margin-top: 4px; }
+    .catalogue .link { font-size: 0.88rem; font-weight: 600; margin-top: 8px; display: inline-block; }
+    .subhead { font-family: var(--mono); font-size: 0.72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--moss); margin: 48px 0 0; padding-bottom: 12px; }
+
+    /* about */
+    .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; }
+    .about-grid p { color: var(--ink-2); }
+    .about-grid p + p { margin-top: 14px; }
+    .about-grid p strong { color: var(--ink); font-weight: 600; }
+    .aside-card { background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); padding: 26px 28px; }
+    .aside-card h3 { font-family: var(--mono); font-size: 0.7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--moss); font-weight: 500; margin-bottom: 10px; }
+    .aside-card h3:not(:first-child) { margin-top: 24px; }
+    .aside-card ul { list-style: none; }
+    .aside-card li { padding: 7px 0; border-bottom: 1px dashed var(--rule); font-size: 0.93rem; }
+    .aside-card li:last-child { border-bottom: 0; }
+
+    /* art */
+    .frames { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+    .frame { margin: 0; }
+    .frame .mat {
+      background: #fff; padding: 14px; border-radius: 2px;
+      box-shadow: 0 0 0 7px #8a6f4c, 0 0 0 8px #6e5638, 0 22px 30px -18px rgba(0,0,0,.55);
+      margin: 8px;
+    }
+    .frame img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--paper-2); }
+    .frame figcaption { margin-top: 22px; font-size: 0.82rem; color: var(--ink-2); }
+    .frame figcaption b { font-family: var(--serif); font-weight: 500; font-size: 0.98rem; color: var(--ink); display: block; }
+
+    /* contact */
+    .contact-card {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      background: var(--spruce); color: var(--paper);
+      border-radius: 10px; padding: 48px;
+    }
+    .contact-card h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.15; }
+    .contact-card p { color: #cfd8cf; margin-top: 14px; }
+    .contact-links { list-style: none; align-self: center; }
+    .contact-links li { border-bottom: 1px solid rgba(245,241,232,.2); }
+    .contact-links a, .contact-links span.row {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 14px 0; color: var(--paper); text-decoration: none; font-weight: 500;
+    }
+    .contact-links a:hover { color: var(--tag); }
+    .contact-links .mono { color: #a9b8ab; font-size: 0.68rem; }
+
+    footer { padding: 32px 0 44px; color: var(--ink-2); font-size: 0.85rem; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+    /* reveal on scroll */
+    html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    html.js .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      html.js .reveal { opacity: 1; transform: none; transition: none; }
+      .label, .label:hover { transition: none; transform: none; }
+      .flock { animation: none !important; }
+    }
+    .flock { animation: drift 26s ease-in-out infinite alternate; }
+    @keyframes drift { from { transform: translate(0,0); } to { transform: translate(40px,-10px); } }
+
+    /* responsive */
+    @media (max-width: 960px) {
+      .labels, .tools { grid-template-columns: 1fr 1fr; }
+      .frames { grid-template-columns: 1fr 1fr; }
+      .hero-grid, .about-grid, .contact-card { grid-template-columns: 1fr; gap: 28px; }
+      .hall-head, .kit, .exhibit { grid-template-columns: 1fr; gap: 12px; }
+      .kit-groups { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .wrap { padding: 0 16px; }
+      .brand { display: none; }
+      .nav { margin-left: 0; gap: 16px; }
+      .hero { padding-top: 44px; }
+      section.hall { padding: 64px 0; }
+      .labels, .tools { grid-template-columns: 1fr; }
+      .exhibit { padding: 22px 20px; }
+      .catalogue li { grid-template-columns: 1fr; gap: 6px; }
+      .contact-card { padding: 30px 22px; }
+      .spec-tag { display: none; }
+      .case-label { position: static; max-width: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; box-shadow: none; }
+    }
   </style>
 </head>
 <body>
 
-  <button id="language-toggle">FR</button>
-
-  <!-- ── SIDEBAR ── -->
-  <aside id="sidebar">
-    <div class="avatar-wrap float">🦆</div>
-    <h1>Megan R. Edgar</h1>
-    <p class="subtitle">Wildlife Biologist &amp; PhD Student<br>Boreal Bird Conservation<br>University of Alberta</p>
-
-    <nav>
-      <ul>
-        <li><a href="#hero">🏠 <span class="lang-inline en active">Home</span><span class="lang-inline fr">Accueil</span></a></li>
-        <li><a href="#research">🔬 <span class="lang-inline en active">Research</span><span class="lang-inline fr">Recherche</span></a></li>
-        <li><a href="#projects">🗺️ <span class="lang-inline en active">Projects</span><span class="lang-inline fr">Projets</span></a></li>
-        <li><a href="#tools">🛠️ <span class="lang-inline en active">Tools</span><span class="lang-inline fr">Outils</span></a></li>
-        <li><a href="#publications">📄 Publications</a></li>
-        <li><a href="#about">🌿 <span class="lang-inline en active">About</span><span class="lang-inline fr">À propos</span></a></li>
-        <li><a href="#art">🎨 <span class="lang-inline en active">Art</span><span class="lang-inline fr">Art</span></a></li>
-        <li><a href="#contact">✉️ Contact</a></li>
-        <li><a href="#" style="color:var(--olive-dark);">📋 CV <span style="font-size:0.7rem;color:var(--muted)">(coming soon)</span></a></li>
-      </ul>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">Megan R. Edgar <span>· boreal birds</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#research"><span class="en">Research</span><span class="fr">Recherche</span></a>
+      <a href="#projects"><span class="en">Projects</span><span class="fr">Projets</span></a>
+      <a href="#tools"><span class="en">Tools</span><span class="fr">Outils</span></a>
+      <a href="#publications">Publications</a>
+      <a href="#about"><span class="en">About</span><span class="fr">À propos</span></a>
+      <a href="#art">Art</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <button id="lang-toggle" type="button" aria-label="Passer au français">FR</button>
+  </div>
+</header>
 
-    <div class="social-icons">
-      <a href="https://github.com/megredgar" title="GitHub" target="_blank" rel="noopener">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/meganredgar/" title="LinkedIn" target="_blank" rel="noopener">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/megahfauna/" title="Instagram @megahfauna" target="_blank" rel="noopener">📸</a>
-      <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" title="Google Scholar" target="_blank" rel="noopener">🎓</a>
-      <a href="mailto:mredgar@ualberta.ca" title="Email">✉️</a>
+<main id="top">
+
+  <!-- ───────── HERO ───────── -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow mono"><span class="en">Boreal bird ecology &amp; conservation</span><span class="fr">Écologie et conservation des oiseaux boréaux</span></p>
+      <h1 class="reveal">Megan R. <em>Edgar</em></h1>
+
+      <div class="hero-grid">
+        <p class="tagline reveal">
+          <span class="en">Where boreal waterbirds are going, what's driving them, and what they tell us about the wetlands they depend on.</span>
+          <span class="fr">Où vont les oiseaux aquatiques boréaux, ce qui les pousse, et ce qu'ils nous révèlent sur les milieux humides dont ils dépendent.</span>
+        </p>
+        <div class="reveal">
+          <div class="en">
+            <p class="lead">I'm a PhD student at the University of Alberta and a graduate student with the Boreal Avian Modelling (BAM) Project. I study boreal waterbirds — how their ranges are shifting as the climate warms, how they respond to wildfire, and what they can tell us about the health of boreal wetlands.</p>
+            <p class="lead">Waterfowl and shorebirds already have some of the best long-term survey data of any birds. My work brings those surveys together with <strong>autonomous recording units (ARUs)</strong> — and tests whether acoustic data are enough — so we can answer ecological questions across the whole boreal.</p>
+          </div>
+          <div class="fr">
+            <p class="lead">Je suis doctorante à l'Université de l'Alberta et étudiante aux cycles supérieurs au sein du Projet de modélisation aviaire boréale (BAM). J'étudie les oiseaux aquatiques boréaux — comment leurs aires de répartition se déplacent avec le réchauffement climatique, comment ils répondent aux feux de forêt, et ce qu'ils peuvent nous apprendre sur la santé des milieux humides boréaux.</p>
+            <p class="lead">La sauvagine et les limicoles disposent déjà de certaines des meilleures données de suivi à long terme de tous les oiseaux. Mon travail combine ces inventaires avec les <strong>unités d'enregistrement acoustique (ARU)</strong> — et vérifie si les données acoustiques suffisent — afin de répondre à des questions écologiques à l'échelle de toute la forêt boréale.</p>
+          </div>
+          <div class="actions">
+            <a href="#research" class="btn btn-solid"><span class="en">Explore my research</span><span class="fr">Voir mes recherches</span> →</a>
+            <a href="#contact" class="btn btn-line"><span class="en">Get in touch</span><span class="fr">Me contacter</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diorama -->
+      <figure class="diorama reveal" aria-label="Illustrated boreal wetland at dusk with a flight of ducks">
+        <svg id="diorama" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" role="img">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0"   stop-color="#b9c7c6"/>
+              <stop offset=".55" stop-color="#e6d9c3"/>
+              <stop offset="1"   stop-color="#f1d9bd"/>
+            </linearGradient>
+            <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cdbfa6"/>
+              <stop offset="1" stop-color="#7f8f86"/>
+            </linearGradient>
+            <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#fbe8cf" stop-opacity="1"/>
+              <stop offset="1" stop-color="#fbe8cf" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="1200" height="460" fill="url(#sky)"/>
+          <circle cx="840" cy="300" r="190" fill="url(#sun)"/>
+          <circle cx="840" cy="300" r="34" fill="#f8e3c6" opacity=".9"/>
+          <!-- distant hills -->
+          <path d="M0 300 C 160 270, 300 290, 440 276 S 760 262, 900 280 S 1100 268, 1200 282 L1200 320 L0 320Z" fill="#a8b2a4" opacity=".7"/>
+          <g id="trees-far"></g>
+          <g id="trees-mid"></g>
+          <!-- water -->
+          <rect y="318" width="1200" height="142" fill="url(#water)"/>
+          <g id="ripples" stroke="#f3e6d2" stroke-linecap="round" opacity=".55"></g>
+          <g id="trees-near"></g>
+          <g id="reeds" stroke="#28392f" stroke-linecap="round" fill="none"></g>
+          <g class="flock" id="flock" fill="#2a352f"></g>
+        </svg>
+        <figcaption class="case-label">
+          <span class="mono"><span class="en">Diorama · Boreal wetland at dusk</span><span class="fr">Diorama · Milieu humide boréal au crépuscule</span></span>
+          <p><span class="en">Decades of waterbird surveys, and thousands of ARUs listening across the boreal. The question is how to use them together.</span><span class="fr">Des décennies d'inventaires d'oiseaux aquatiques et des milliers d'ARU à l'écoute dans la forêt boréale. Reste à savoir comment les utiliser ensemble.</span></p>
+        </figcaption>
+        <div class="spec-tag" aria-hidden="true">
+          <b>CAT. NO. MRE-2026</b><br>
+          <span class="en">Coll. Bayne Lab, Univ. of Alberta</span><span class="fr">Coll. Labo Bayne, Univ. de l'Alberta</span><br>
+          <span class="en">Loc. Beaverhill, AB</span><span class="fr">Loc. Beaverhill, AB</span>
+        </div>
+      </figure>
     </div>
-  </aside>
+  </section>
 
-  <!-- ── MAIN ── -->
-  <div id="main">
-
-    <!-- HERO -->
-    <section id="hero">
-      <div class="hero-inner">
-        <div class="hero-tag lang en active">🌲 Boreal Bird Ecology &amp; Conservation</div>
-        <div class="hero-tag lang fr">🌲 Écologie et conservation des oiseaux boréaux</div>
-
-        <div class="lang en active fade-in">
-          <h2>Hi! I'm <span class="highlight">Megan</span>.</h2>
-          <p class="lead">
-            I'm a PhD student at the University of Alberta studying boreal waterbirds —
-            how we detect them, how they respond to landscape change, and how that knowledge
-            can guide large-scale conservation in Canada's boreal forest.
-          </p>
-          <p class="lead">
-            My work bridges <strong>bioacoustics</strong>, <strong>camera trapping</strong>,
-            <strong>traditional point counts</strong>, and <strong>statistical modeling</strong>
-            to understand what our monitoring methods actually capture — and what they miss.
-          </p>
-          <a href="#research" class="btn btn-primary">Explore my research 🔬</a>
-          <a href="#contact" class="btn btn-secondary">Get in touch ✉️</a>
-        </div>
-
-        <div class="lang fr fade-in">
-          <h2>Bonjour! Je suis <span class="highlight">Megan</span>.</h2>
-          <p class="lead">
-            Je suis doctorante à l'Université de l'Alberta, spécialisée dans les oiseaux aquatiques boréaux —
-            comment les détecter, comment ils répondent aux changements du paysage, et comment ces connaissances
-            peuvent orienter la conservation à grande échelle dans la forêt boréale du Canada.
-          </p>
-          <p class="lead">
-            Mon travail combine <strong>bioacoustique</strong>, <strong>pièges photographiques</strong>,
-            <strong>inventaires par points d'écoute</strong> et <strong>modélisation statistique</strong>
-            pour mieux comprendre ce que nos méthodes de suivi capturent — et ce qu'elles ratent.
-          </p>
-          <a href="#research" class="btn btn-primary">Voir mes recherches 🔬</a>
-          <a href="#contact" class="btn btn-secondary">Me contacter ✉️</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- RESEARCH -->
-    <section id="research">
-      <span class="section-label lang en active">What I study</span>
-      <span class="section-label lang fr">Ce que j'étudie</span>
-      <h2 class="lang en active">Research</h2>
-      <h2 class="lang fr">Recherche</h2>
-
-      <div class="lang en active">
-        <p>
-          The boreal forest holds roughly a third of the world's breeding birds, yet monitoring programs
-          for waterbirds — waterfowl and shorebirds — lag far behind those for songbirds.
-          My PhD asks a fundamental question: <strong>how well do our monitoring methods actually
-          detect the birds we care about, and does that vary across habitats and species?</strong>
-        </p>
-        <p>
-          I am working to compare detection probability across autonomous recording units (ARUs), camera traps,
-          and traditional point counts, to learn about how we can use passive monitoring to track waterfowl and shorebirds.
-          Closing this gap matters for conservation planning across the boreal-prairie ecotone.
-        </p>
-      </div>
-
-      <div class="lang fr">
-        <p>
-          La forêt boréale abrite environ un tiers des oiseaux nicheurs du monde, mais les programmes
-          de suivi pour les oiseaux aquatiques — sauvagine et limicoles — sont bien moins développés
-          que ceux pour les passereaux. Ma thèse pose une question fondamentale : <strong>dans quelle
-          mesure nos méthodes de suivi détectent-elles réellement les oiseaux qui nous importent,
-          et cela varie-t-il selon les habitats et les espèces?</strong>
-        </p>
-        <p>
-          Je cherche à comparer la probabilité de détection entre les unités d'enregistrement acoustique (ARU),
-          les pièges photographiques et les inventaires par points d'écoute traditionnels, afin de mieux comprendre
-          comment le suivi passif peut servir à surveiller la sauvagine et les limicoles.
-          Combler cet écart est essentiel pour la planification de la conservation à l'écotone boréal-prairie.
-        </p>
-      </div>
-
-      <div class="card-grid">
-        <div class="card">
-          <span class="card-icon">🎙️</span>
-          <h4 class="lang en active">Acoustic Monitoring</h4>
-          <h4 class="lang fr">Suivi acoustique</h4>
-          <p class="lang en active">ARU-based detection probability estimation, HawkEars CNN recognizer calibration, and acoustic localization pipelines for multi-species boreal bird datasets.</p>
-          <p class="lang fr">Estimation de la probabilité de détection par ARU, calibration du recognizer CNN HawkEars, et pipelines de localisation acoustique pour des jeux de données multi-espèces.</p>
-        </div>
-        <div class="card">
-          <span class="card-icon">🦆</span>
-          <h4 class="lang en active">Waterbird Monitoring</h4>
-          <h4 class="lang fr">Suivi des oiseaux aquatiques</h4>
-          <p class="lang en active">Bridging the gap between established songbird monitoring infrastructure (BAM, BBMP, ABMI) and boreal waterfowl and shorebird programs (WBPHS, PRISM).</p>
-          <p class="lang fr">Combler l'écart entre l'infrastructure de suivi des passereaux (BAM, BBMP, ABMI) et les programmes pour sauvagine et limicoles boréaux (WBPHS, PRISM).</p>
-        </div>
-        <div class="card">
-          <span class="card-icon">🗺️</span>
-          <h4 class="lang en active">Spatial Modeling</h4>
-          <h4 class="lang fr">Modélisation spatiale</h4>
-          <p class="lang en active">Species distribution and density modeling using BAM v5 rasters, occupancy models, RSPFs, and QPAD-corrected GLMs across boreal Bird Conservation Regions.</p>
-          <p class="lang fr">Modélisation de la distribution et densité d'espèces avec les rasters BAM v5, modèles d'occupation, RSPF, et GLMs corrigés par QPAD à l'échelle boréale.</p>
-        </div>
-        <div class="card">
-          <span class="card-icon">🔥</span>
-          <h4 class="lang en active">Wildfire &amp; Climate</h4>
-          <h4 class="lang fr">Feux de forêt et climat</h4>
-          <p class="lang en active">Investigating how wildfire exposure and climate change shape boreal bird community composition, range shifts, and conservation prioritization.</p>
-          <p class="lang fr">Étude de l'effet des feux de forêt et du changement climatique sur la composition des communautés d'oiseaux boréaux, les déplacements d'aires et la priorisation de la conservation.</p>
-        </div>
-        <div class="card">
-          <span class="card-icon">💧</span>
-          <h4 class="lang en active">Wetland Health</h4>
-          <h4 class="lang fr">Santé des milieux humides</h4>
-          <p class="lang en active">Using waterbirds as bioindicators of wetland health across the boreal-prairie ecotone, integrating point count and ARU data for landscape-scale inference.</p>
-          <p class="lang fr">Utilisation des oiseaux aquatiques comme bioindicateurs de la santé des milieux humides, en intégrant données d'inventaire et ARU pour des inférences à grande échelle.</p>
-        </div>
-        <div class="card">
-          <span class="card-icon">🌊</span>
-          <h4 class="lang en active">Aquatic Invasions</h4>
-          <h4 class="lang fr">Invasions aquatiques</h4>
-          <p class="lang en active">Prior work using stable isotope analysis to understand how invasive species (Chinese mystery snail, northern crayfish) restructure reservoir food webs.</p>
-          <p class="lang fr">Travaux antérieurs utilisant l'analyse des isotopes stables pour comprendre comment les espèces envahissantes restructurent les réseaux trophiques des réservoirs.</p>
+  <!-- ───────── RESEARCH ───────── -->
+  <section class="hall" id="research">
+    <div class="wrap">
+      <div class="hall-head reveal">
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>I</b></div>
+        <div>
+          <h2><span class="en">Research</span><span class="fr">Recherche</span></h2>
+          <div class="en">
+            <p class="hall-intro">Waterfowl and other waterbirds are among the best-monitored birds in North America, with decades of aerial, ground, and shorebird surveys behind them. Meanwhile, ARUs deployed across the boreal are recording waterbirds too. What we haven't yet worked out is <strong>how to use all of these data together, and whether ARU data are sufficient on their own</strong>.</p>
+            <p class="hall-intro">My PhD puts that combined picture to work on ecological questions: how boreal waterbird ranges are shifting with climate change, how waterbird communities respond to wildfire, and whether waterbirds can serve as indicators of wetland health across the boreal-prairie ecotone.</p>
+          </div>
+          <div class="fr">
+            <p class="hall-intro">La sauvagine et les autres oiseaux aquatiques comptent parmi les oiseaux les mieux suivis en Amérique du Nord, grâce à des décennies d'inventaires aériens, terrestres et de limicoles. Parallèlement, les ARU déployées dans la forêt boréale enregistrent aussi les oiseaux aquatiques. Ce qu'il reste à établir, c'est <strong>comment utiliser toutes ces données ensemble, et si les données d'ARU suffisent à elles seules</strong>.</p>
+            <p class="hall-intro">Ma thèse met cette vision intégrée au service de questions écologiques : comment les aires de répartition des oiseaux aquatiques boréaux se déplacent avec les changements climatiques, comment leurs communautés répondent aux feux de forêt, et si ces oiseaux peuvent servir d'indicateurs de la santé des milieux humides à l'écotone boréal-prairie.</p>
+          </div>
         </div>
       </div>
 
-      <h3 class="lang en active">Methods &amp; Tools</h3>
-      <h3 class="lang fr">Méthodes et outils</h3>
-      <div class="skills-grid">
-        <span class="skill-chip">QPAD offsets</span>
-        <span class="skill-chip">N-mixture models</span>
-        <span class="skill-chip">Occupancy models</span>
-        <span class="skill-chip">RSPF</span>
-        <span class="skill-chip">Acoustic localization</span>
-        <span class="skill-chip">CNN recognizer calibration</span>
-        <span class="skill-chip olive">R / R Shiny</span>
-        <span class="skill-chip olive">Python</span>
-        <span class="skill-chip olive">WildTrax</span>
-        <span class="skill-chip olive">HawkEars</span>
-        <span class="skill-chip olive">GIS / spatial R</span>
-        <span class="skill-chip olive">BAM v5 rasters</span>
-        <span class="skill-chip olive">OpenSoundscape</span>
-        <span class="skill-chip olive">DHARMa diagnostics</span>
-        <span class="skill-chip">ARUs</span>
-        <span class="skill-chip">Camera traps</span>
-        <span class="skill-chip">Point counts</span>
-        <span class="skill-chip">Stable isotope analysis</span>
+      <div class="labels">
+        <article class="label reveal">
+          <div class="label-top"><span class="mono">No. 01</span>
+            <svg viewBox="0 0 32 32"><path d="M16 4c1 5 7 8 7 15a7 7 0 0 1-14 0c0-4 2-6 3-8 1 3 2 4 4 4 0-4-1-7 0-11z"/></svg></div>
+          <h3><span class="en">Wildfire &amp; Climate</span><span class="fr">Feux de forêt et climat</span></h3>
+          <p class="en">Investigating how wildfire exposure and climate change shape boreal bird community composition, range shifts, and conservation prioritization.</p>
+          <p class="fr">Étude de l'effet des feux de forêt et du changement climatique sur la composition des communautés d'oiseaux boréaux, les déplacements d'aires et la priorisation de la conservation.</p>
+        </article>
+        <article class="label reveal">
+          <div class="label-top"><span class="mono">No. 02</span>
+            <svg viewBox="0 0 32 32"><path d="M16 4c4 6 8 10 8 15a8 8 0 0 1-16 0c0-5 4-9 8-15z"/><path d="M12 20a4 4 0 0 0 4 4"/></svg></div>
+          <h3><span class="en">Wetland Health</span><span class="fr">Santé des milieux humides</span></h3>
+          <p class="en">Using waterbirds as bioindicators of wetland health across the boreal-prairie ecotone, drawing on survey and ARU data for landscape-scale inference.</p>
+          <p class="fr">Utilisation des oiseaux aquatiques comme bioindicateurs de la santé des milieux humides à l'écotone boréal-prairie, à partir de données d'inventaire et d'ARU pour des inférences à grande échelle.</p>
+        </article>
+        <article class="label reveal">
+          <div class="label-top"><span class="mono">No. 03</span>
+            <svg viewBox="0 0 32 32"><path d="M4 8l8-3 8 3 8-3v19l-8 3-8-3-8 3z"/><path d="M12 5v19M20 8v19"/></svg></div>
+          <h3><span class="en">Distributions &amp; Habitat</span><span class="fr">Répartition et habitat</span></h3>
+          <p class="en">Species distribution, density, and habitat selection modeling using BAM v5 rasters, occupancy models, RSPFs, and QPAD-corrected GLMs across boreal Bird Conservation Regions.</p>
+          <p class="fr">Modélisation de la répartition, de la densité et de la sélection d'habitat avec les rasters BAM v5, modèles d'occupation, RSPF et GLM corrigés par QPAD à l'échelle des régions de conservation des oiseaux boréales.</p>
+        </article>
+        <article class="label reveal">
+          <div class="label-top"><span class="mono">No. 04</span>
+            <svg viewBox="0 0 32 32"><path d="M4 20c4 4 18 4 22-1 1-2 0-4-3-4h-6c0-3 2-6 5-6 2 0 3 1 3 2l3 1-3 1"/><path d="M3 25c3 1 6 1 9 0s6-1 9 0 6 1 8 0"/></svg></div>
+          <h3><span class="en">Integrating Waterbird Data</span><span class="fr">Intégration des données</span></h3>
+          <p class="en">Bringing long-running waterfowl and shorebird surveys (WBPHS, PRISM) together with ARU and point count data from BAM, BBMP, and ABMI — and testing when ARU data are enough on their own.</p>
+          <p class="fr">Réunir les inventaires de longue date de la sauvagine et des limicoles (WBPHS, PRISM) et les données d'ARU et de points d'écoute de BAM, du BBMP et de l'ABMI — et déterminer quand les données d'ARU suffisent à elles seules.</p>
+        </article>
+        <article class="label reveal">
+          <div class="label-top"><span class="mono">No. 05</span>
+            <svg viewBox="0 0 32 32"><path d="M3 16h3M9 10v12M13 6v20M17 11v10M21 8v16M25 13v6M29 16h0"/></svg></div>
+          <h3><span class="en">Acoustic Monitoring</span><span class="fr">Suivi acoustique</span></h3>
+          <p class="en">HawkEars CNN recognizer calibration and acoustic localization pipelines for multi-species boreal bird datasets.</p>
+          <p class="fr">Calibration du recognizer CNN HawkEars et pipelines de localisation acoustique pour des jeux de données multi-espèces.</p>
+        </article>
+        <article class="label reveal">
+          <div class="label-top"><span class="mono">No. 06</span>
+            <svg viewBox="0 0 32 32"><path d="M8 22c0-7 5-13 11-13 4 0 6 3 6 6 0 4-3 6-6 6-2 0-4-1-4-3s1-3 3-3"/><path d="M4 24h24"/></svg></div>
+          <h3><span class="en">Aquatic Invasions</span><span class="fr">Invasions aquatiques</span></h3>
+          <p class="en">Prior work using stable isotope analysis to understand how invasive species (Chinese mystery snail, northern crayfish) restructure reservoir food webs.</p>
+          <p class="fr">Travaux antérieurs utilisant l'analyse des isotopes stables pour comprendre comment les espèces envahissantes restructurent les réseaux trophiques des réservoirs.</p>
+        </article>
       </div>
-    </section>
 
-    <!-- CURRENT PROJECTS -->
-    <section id="projects">
-      <span class="section-label lang en active">My PhD</span>
-      <span class="section-label lang fr">Mon doctorat</span>
-      <h2 class="lang en active">Current Projects</h2>
-      <h2 class="lang fr">Projets actuels</h2>
+      <div class="kit reveal">
+        <div>
+          <span class="mono"><span class="en">Field kit</span><span class="fr">Trousse de terrain</span></span>
+          <h3><span class="en">Methods &amp; tools</span><span class="fr">Méthodes et outils</span></h3>
+        </div>
+        <div class="kit-groups">
+          <div class="kit-group">
+            <h4><span class="en">Methods &amp; survey</span><span class="fr">Méthodes et inventaires</span></h4>
+            <div class="chips">
+              <span class="chip">QPAD offsets</span><span class="chip">N-mixture models</span><span class="chip">Occupancy models</span>
+              <span class="chip">RSPF</span><span class="chip">Acoustic localization</span><span class="chip">CNN recognizer calibration</span>
+              <span class="chip">ARUs</span><span class="chip">Camera traps</span><span class="chip">Point counts</span><span class="chip">Stable isotope analysis</span>
+            </div>
+          </div>
+          <div class="kit-group">
+            <h4><span class="en">Software &amp; data</span><span class="fr">Logiciels et données</span></h4>
+            <div class="chips">
+              <span class="chip dark">R / R Shiny</span><span class="chip dark">Python</span><span class="chip dark">WildTrax</span>
+              <span class="chip dark">HawkEars</span><span class="chip dark">OpenSoundscape</span><span class="chip dark">GIS / spatial R</span>
+              <span class="chip dark">BAM v5 rasters</span><span class="chip dark">DHARMa diagnostics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <p class="lang en active" style="font-style:italic;color:var(--muted);border-left:4px solid var(--pink);padding-left:1rem;max-width:680px;">
-        My PhD has two sides: some chapters ask <strong style="color:var(--brown);">how we monitor</strong> boreal waterbirds — developing and comparing methods, correcting for detection bias. Others ask <strong style="color:var(--brown);">what's actually happening</strong> to the birds — where they're shifting, what's driving change, and what they're telling us about the health of boreal wetlands.
-      </p>
-      <p class="lang fr" style="font-style:italic;color:var(--muted);border-left:4px solid var(--pink);padding-left:1rem;max-width:680px;">
-        Mon doctorat a deux volets : certains chapitres portent sur <strong style="color:var(--brown);">comment surveiller</strong> les oiseaux aquatiques boréaux — développer et comparer des méthodes, corriger les biais de détection. D'autres s'interrogent sur <strong style="color:var(--brown);">ce qui se passe réellement</strong> pour ces oiseaux — leurs déplacements, les facteurs de changement, et ce qu'ils nous révèlent sur la santé des milieux humides boréaux.
-      </p>
+  <!-- ───────── PROJECTS ───────── -->
+  <section class="hall alt" id="projects">
+    <div class="wrap">
+      <div class="hall-head reveal">
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>II</b></div>
+        <div>
+          <h2><span class="en">Current projects</span><span class="fr">Projets actuels</span></h2>
+          <p class="hall-intro en">My PhD is driven by ecological questions about <strong>what's happening to boreal waterbirds</strong>: where they're shifting, what's driving change, and what they're telling us about the health of boreal wetlands. Underpinning that is the work of <strong>making the data work together</strong>, combining existing waterbird surveys with ARU data so those questions can be answered across the boreal.</p>
+          <p class="hall-intro fr">Mon doctorat est guidé par des questions écologiques sur <strong>ce qui arrive aux oiseaux aquatiques boréaux</strong> : leurs déplacements, les facteurs de changement, et ce qu'ils nous révèlent sur la santé des milieux humides boréaux. En appui, il s'agit de <strong>faire travailler les données ensemble</strong>, en combinant les inventaires existants et les données d'ARU pour répondre à ces questions à l'échelle de la forêt boréale.</p>
+        </div>
+      </div>
 
-      <h3 class="lang en active" style="margin-top:2rem;margin-bottom:0.5rem;color:var(--olive-dark);">🔬 How we monitor</h3>
-      <h3 class="lang fr" style="margin-top:2rem;margin-bottom:0.5rem;color:var(--olive-dark);">🔬 Comment surveiller</h3>
+      <div class="gallery-title reveal">
+        <span class="mono">Gallery A</span>
+        <h3><span class="en">What's happening to the birds</span><span class="fr">Ce qui arrive aux oiseaux</span></h3>
+      </div>
+      <div class="exhibits">
+        <article class="exhibit reveal">
+          <div class="exhibit-meta"><span class="mono">Exhibit</span><div class="no">A.1</div></div>
+          <div>
+            <h4><span class="en">Boreal Waterbird Range Shifts</span><span class="fr">Déplacements d'aires des oiseaux aquatiques boréaux</span></h4>
+            <p class="en">Documenting how boreal waterfowl and shorebird distributions are shifting in response to climate change — combining long-term survey and ARU data to understand which species are moving, where, and how fast. The boreal is warming faster than almost anywhere on Earth, and we don't yet have a clear picture of what that means for waterbirds.</p>
+            <p class="fr">Documentation des changements de répartition des sauvagines et limicoles boréaux en réponse aux changements climatiques — en combinant données d'inventaires à long terme et d'ARU pour comprendre quelles espèces se déplacent, vers où et à quelle vitesse. La forêt boréale se réchauffe plus vite que presque partout ailleurs sur Terre, et nous n'avons pas encore une image claire de ce que cela signifie pour les oiseaux aquatiques.</p>
+            <div class="tags"><span class="tag"><span class="en">Climate change</span><span class="fr">Changements climatiques</span></span><span class="tag"><span class="en">Species distributions</span><span class="fr">Répartition des espèces</span></span><span class="tag"><span class="en">BAM data</span><span class="fr">Données BAM</span></span></div>
+          </div>
+        </article>
+        <article class="exhibit reveal">
+          <div class="exhibit-meta"><span class="mono">Exhibit</span><div class="no">A.2</div></div>
+          <div>
+            <h4><span class="en">Wildfire Effects on Boreal Waterbirds</span><span class="fr">Effets des feux de forêt sur les oiseaux aquatiques boréaux</span></h4>
+            <p class="en">Wildfire is the dominant natural disturbance in the boreal, and its frequency and severity are increasing. This chapter asks how waterbird communities respond to fire — across species, time since burn, and fire severity — and what that means for conservation planning in a landscape that is burning more.</p>
+            <p class="fr">Les feux de forêt sont la perturbation naturelle dominante dans la forêt boréale, et leur fréquence et sévérité augmentent. Ce chapitre examine comment les communautés d'oiseaux aquatiques répondent aux feux — selon les espèces, le temps écoulé depuis le feu et la sévérité — et ce que cela implique pour la conservation dans un paysage qui brûle de plus en plus.</p>
+            <div class="tags"><span class="tag"><span class="en">Disturbance ecology</span><span class="fr">Écologie des perturbations</span></span><span class="tag"><span class="en">Fire regimes</span><span class="fr">Régimes de feux</span></span><span class="tag"><span class="en">Community composition</span><span class="fr">Composition des communautés</span></span></div>
+          </div>
+        </article>
+        <article class="exhibit reveal">
+          <div class="exhibit-meta"><span class="mono">Exhibit</span><div class="no">A.3</div></div>
+          <div>
+            <h4><span class="en">Waterbirds as Wetland Health Indicators</span><span class="fr">Oiseaux aquatiques comme indicateurs de la santé des milieux humides</span></h4>
+            <p class="en">Boreal wetlands are among the most carbon-dense ecosystems on the planet, yet we have limited tools for monitoring their ecological condition at scale. This chapter develops waterbird community metrics as practical bioindicators of wetland health across the boreal-prairie ecotone — connecting bird monitoring to broader ecosystem assessment.</p>
+            <p class="fr">Les milieux humides boréaux comptent parmi les écosystèmes les plus riches en carbone de la planète, mais nous disposons de peu d'outils pour surveiller leur état écologique à grande échelle. Ce chapitre développe des métriques de communautés d'oiseaux aquatiques comme bioindicateurs pratiques de la santé des milieux humides à l'écotone boréal-prairie — reliant le suivi ornithologique à l'évaluation écosystémique.</p>
+            <div class="tags"><span class="tag">Bioindicators</span><span class="tag"><span class="en">Wetland ecology</span><span class="fr">Écologie des milieux humides</span></span><span class="tag"><span class="en">Boreal-prairie ecotone</span><span class="fr">Écotone boréal-prairie</span></span></div>
+          </div>
+        </article>
+        <article class="exhibit reveal">
+          <div class="exhibit-meta">
+            <span class="mono">Exhibit</span><div class="no">A.4</div>
+            <span class="latin">Ammospiza leconteii</span>
+          </div>
+          <div>
+            <h4><span class="en">LeConte's Sparrow Habitat Selection &amp; Occupancy</span><span class="fr">Sélection d'habitat et occupation du Bruant de Le Conte</span></h4>
+            <p class="en">Dual-framework analysis (QPAD GLM and RSPF) of LeConte's Sparrow habitat selection across peatland landscapes, plus occupancy modeling using the Boreal Birds Monitoring Program (2016–ongoing; point count and ARU data) WildTrax dataset across boreal Manitoba and Saskatchewan.</p>
+            <p class="fr">Analyse à double cadre (GLM QPAD et RSPF) de la sélection d'habitat du Bruant de Le Conte dans les paysages de tourbières, ainsi que modélisation de l'occupation à partir des données du Programme de surveillance des oiseaux boréaux (2016 à aujourd'hui; points d'écoute et ARU) sur WildTrax, au Manitoba et en Saskatchewan boréaux.</p>
+            <div class="tags"><span class="tag"><span class="en">In review</span><span class="fr">En révision</span></span><span class="tag"><span class="en">Peatlands</span><span class="fr">Tourbières</span></span></div>
+          </div>
+        </article>
+      </div>
 
-      <ul class="project-list">
+      <div class="gallery-title reveal" style="margin-top:64px">
+        <span class="mono">Gallery B</span>
+        <h3><span class="en">Making the data work together</span><span class="fr">Faire travailler les données ensemble</span></h3>
+      </div>
+      <div class="exhibits">
+        <article class="exhibit reveal">
+          <div class="exhibit-meta">
+            <span class="mono">Exhibit</span><div class="no">B.1</div>
+            <span class="latin"><span class="en">Anatidae &amp; Charadriiformes</span><span class="fr">Anatidae et Charadriiformes</span></span>
+          </div>
+          <div>
+            <h4><span class="en">Combining Waterbird Surveys with ARU Data</span><span class="fr">Combiner les inventaires d'oiseaux aquatiques et les données d'ARU</span></h4>
+            <p class="en">Testing how ARUs, camera traps, and point counts capture boreal waterfowl and shorebirds, so ARU data can be combined with existing waterbird surveys — and finding out when acoustic data alone are sufficient. Funded through an NSERC Alliance Grant in collaboration with Ducks Unlimited Canada, Biodiversity Pathways, and Dr. Elly Knight. Co-supervised by Dr. Erin Bayne and Dr. Judith Toms.</p>
+            <p class="fr">Évaluer comment les ARU, les pièges photographiques et les points d'écoute captent la sauvagine et les limicoles boréaux, afin de combiner les données d'ARU aux inventaires existants — et déterminer quand les données acoustiques suffisent à elles seules. Financé par une subvention Alliance du CRSNG en collaboration avec Canards Illimités Canada, Biodiversity Pathways et Dr. Elly Knight. Cosupervisé par Dr. Erin Bayne et Dr. Judith Toms.</p>
+            <div class="tags"><span class="tag">Bayne Lab / U of A</span><span class="tag">Ducks Unlimited Canada</span><span class="tag">BAM</span></div>
+          </div>
+        </article>
+
+        <article class="exhibit reveal">
+          <div class="exhibit-meta">
+            <span class="mono">Exhibit</span><div class="no">B.2</div>
+            <span class="latin">BARLT</span>
+          </div>
+          <div>
+            <h4><span class="en">Acoustic Localization of Boreal Birds</span><span class="fr">Localisation acoustique des oiseaux boréaux</span></h4>
+            <p class="en">Using spatially-distributed ARU arrays to localize individual birds in 3D space, combining HawkEars CNN detections with <a href="https://opensoundscape.org" target="_blank" rel="noopener">OpenSoundscape</a> localization algorithms (Lapp et al. 2023).</p>
+            <p class="fr">Utilisation de réseaux d'ARU distribués spatialement pour localiser des oiseaux individuels en 3D, en combinant les détections CNN de HawkEars avec les algorithmes de localisation d'<a href="https://opensoundscape.org" target="_blank" rel="noopener">OpenSoundscape</a> (Lapp et al. 2023).</p>
+            <figure class="plate">
+              <img src="images/localization.jpg" alt="Map of localized boreal bird detections from an ARU array" loading="lazy" />
+              <figcaption><span class="en">Plate 1 — Localized detections from an ARU array.</span><span class="fr">Planche 1 — Détections localisées à partir d'un réseau d'ARU.</span></figcaption>
+            </figure>
+            <div class="tags"><span class="tag">OpenSoundscape</span><span class="tag">HawkEars</span><span class="tag"><span class="en">Methods paper</span><span class="fr">Article méthodologique</span></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── TOOLS ───────── -->
+  <section class="hall" id="tools">
+    <div class="wrap">
+      <div class="hall-head reveal">
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>III</b></div>
+        <div>
+          <h2><span class="en">Tools &amp; code</span><span class="fr">Outils et code</span></h2>
+          <p class="hall-intro en">I build open-source tools in R and Python to solve real problems in acoustic and ecological workflows. Reproducible code, transparent methods.</p>
+          <p class="hall-intro fr">Je développe des outils open source en R et Python pour résoudre de vrais problèmes dans les flux de travail acoustiques et écologiques. Code reproductible, méthodes transparentes.</p>
+        </div>
+      </div>
+      <div class="tools">
+        <article class="tool reveal">
+          <span class="mono">R Shiny</span>
+          <h3>HawkEars Validator</h3>
+          <p class="en">A lightweight Shiny app for rapid QA/QC of CNN-based bird acoustic recognizer outputs. Go through clips, view spectrograms, listen to audio, and record structured validations (yes / no / unsure) to a traceable CSV.</p>
+          <p class="fr">Une application Shiny légère pour valider rapidement les sorties d'un recognizer acoustique CNN. Parcourez les extraits, visualisez les spectrogrammes, écoutez l'audio et enregistrez des validations structurées (oui / non / incertain) dans un fichier CSV traçable.</p>
+          <a class="more" href="https://github.com/megredgar/ValidationApp" target="_blank" rel="noopener"><span class="en">View on GitHub</span><span class="fr">Voir sur GitHub</span> →</a>
+        </article>
+        <article class="tool reveal">
+          <span class="mono">Python + R</span>
+          <h3><span class="en">Acoustic Localization Pipelines</span><span class="fr">Pipelines de localisation acoustique</span></h3>
+          <p class="en">Multi-species HawkEars/OpenSoundscape acoustic localization scripts (using Frontier Labs Bar-LT with localization firmware), including threshold calibration methodology for boreal species.</p>
+          <p class="fr">Scripts de localisation acoustique multi-espèces HawkEars/OpenSoundscape (utilisant le Frontier Labs Bar-LT avec micrologiciel de localisation), incluant une méthodologie de calibration des seuils pour des espèces boréales.</p>
+        </article>
+        <article class="tool reveal">
+          <span class="mono">R</span>
+          <h3><span class="en">WildTrax Data Pipelines</span><span class="fr">Pipelines de données WildTrax</span></h3>
+          <p class="en">Refactored data pipelines merging ARU and point count project exports from WildTrax, resolving type inconsistencies and building reproducible workflows for CWS-PRA analyses.</p>
+          <p class="fr">Pipelines de données refactorisés pour fusionner les exports de projets ARU et points d'écoute de WildTrax, avec des flux de travail reproductibles pour les analyses du SCF-RPP.</p>
+          <a class="more" href="https://github.com/megredgar" target="_blank" rel="noopener"><span class="en">All my code on GitHub</span><span class="fr">Tout mon code sur GitHub</span> →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── PUBLICATIONS ───────── -->
+  <section class="hall alt" id="publications">
+    <div class="wrap">
+      <div class="hall-head reveal">
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>IV</b></div>
+        <div>
+          <h2>Publications</h2>
+          <p class="hall-intro en">Peer-reviewed articles and popular science writing. Full list on <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+          <p class="hall-intro fr">Articles scientifiques et articles de vulgarisation. Liste complète sur <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+        </div>
+      </div>
+
+      <ul class="catalogue reveal">
         <li>
-          <span class="proj-icon">🦆</span>
-          <div class="proj-body">
-            <h4 class="lang en active">Detection Probability Across Survey Methods</h4>
-            <h4 class="lang fr">Probabilité de détection selon les méthodes de suivi</h4>
-            <p class="lang en active">Comparing how well ARUs, camera traps, and traditional point counts detect boreal waterfowl and shorebirds — and whether those differences matter for the conservation inferences we draw. Funded through NSERC Alliance Grant in collaboration with Ducks Unlimited Canada, Biodiversity Pathways, and Dr. Elly Knight. Co-supervised by Dr. Erin Bayne and Dr. Judith Toms.</p>
-            <p class="lang fr">Comparaison de la capacité des ARU, pièges photographiques et inventaires par points d'écoute à détecter les sauvagines et limicoles boréaux — et si ces différences influencent les conclusions de conservation. Financé par une subvention Alliance du CRSNG en collaboration avec Canards Illimités Canada, Biodiversity Pathways et Dr. Elly Knight. Cosupervisé par Dr. Erin Bayne et Dr. Judith Toms.</p>
-            <span class="proj-tag">Bayne Lab / U of A</span>
-            <span class="proj-tag">Ducks Unlimited Canada</span>
-            <span class="proj-tag">CWS-PRA</span>
+          <div class="yr">2025<small>Aquatic Sciences</small></div>
+          <div>
+            <p class="title en">Community trophic structure within reservoirs changes in the presence of invasive Chinese mystery snail (<em>Cipangopaludina chinensis</em>) and northern crayfish (<em>Faxonius virilis</em>)</p>
+            <p class="title fr">La structure trophique communautaire dans les réservoirs change en présence de l'escargot mystère chinois (<em>Cipangopaludina chinensis</em>) et de l'écrevisse à pinces bleues (<em>Faxonius virilis</em>)</p>
+            <p class="meta">Edgar, M.R., Kimmel, N. &amp; Poesch, M.S.</p>
+            <a class="link" href="https://link.springer.com/article/10.1007/s00027-025-01220-z" target="_blank" rel="noopener">Springer / DOI →</a>
           </div>
         </li>
         <li>
-          <span class="proj-icon">📍</span>
-          <div class="proj-body">
-            <h4 class="lang en active">Acoustic Localization of Boreal Birds (BARLT)</h4>
-            <h4 class="lang fr">Localisation acoustique des oiseaux boréaux (BARLT)</h4>
-            <p class="lang en active">
-              Using spatially-distributed ARU arrays to localize individual birds in 3D space,
-              combining HawkEars CNN detections with
-              <a href="https://opensoundscape.org" target="_blank" rel="noopener">OpenSoundscape</a>
-              localization algorithms (Lapp et al. 2023).
-            </p>
-            <p class="lang fr">
-              Utilisation de réseaux d'ARU distribués spatialement pour localiser des oiseaux individuels en 3D,
-              en combinant les détections CNN de HawkEars avec les algorithmes de localisation d'
-              <a href="https://opensoundscape.org" target="_blank" rel="noopener">OpenSoundscape</a>
-              (Lapp et al. 2023).
-            </p>
-            <img src="images/localization.jpg" alt="Map of localized boreal bird detections from ARU array" style="margin-top:1rem;max-width:520px;width:100%;border-radius:14px;border:3px solid var(--pink-dark);box-shadow:3px 3px 0 var(--pink-dark);display:block;" />
-            <span class="proj-tag">OpenSoundscape</span>
-            <span class="proj-tag">HawkEars</span>
-            <span class="proj-tag">Methods paper</span>
+          <div class="yr">2022<small>BioInvasions Records</small></div>
+          <div>
+            <p class="title en">The first documented occurrence and life history characteristics of the Chinese mystery snail, <em>Cipangopaludina chinensis</em> (Gray, 1834) (Mollusca: Viviparidae) in Alberta, Canada</p>
+            <p class="title fr">Première occurrence documentée et caractéristiques du cycle de vie de l'escargot mystère chinois, <em>Cipangopaludina chinensis</em> (Gray, 1834), en Alberta, Canada</p>
+            <p class="meta">Edgar, M.R., et al.</p>
+            <a class="link" href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank" rel="noopener">PDF →</a>
           </div>
         </li>
         <li>
-          <span class="proj-icon">🐦</span>
-          <div class="proj-body">
-            <h4 class="lang en active">LeConte's Sparrow Habitat Selection &amp; Occupancy</h4>
-            <h4 class="lang fr">Sélection d'habitat et occupation du Bruant de Le Conte</h4>
-            <p class="lang en active">Dual-framework analysis (QPAD GLM and RSPF) of LeConte's Sparrow habitat selection across peatland landscapes, plus occupancy modeling using the Boreal Birds Monitoring Program (2016-ongoing; Point Counts and ARU data) WildTrax dataset across boreal Manitoba and Saskatchewan.</p>
-            <p class="lang fr">Analyse à double cadre (GLM QPAD et RSPF) de la sélection d'habitat du Bruant de Le Conte dans les paysages de tourbières, ainsi que modélisation de l'occupation à partir des données du Programme de surveillance des oiseaux boréaux (2016 à aujourd'hui; points d'écoute et ARU) sur WildTrax, au Manitoba et en Saskatchewan boréaux.</p>
-            <span class="proj-tag">Publication goal</span>
-            <span class="proj-tag">Peatlands</span>
+          <div class="yr">2022<small>Nature Alberta</small></div>
+          <div>
+            <p class="title"><span class="en">Magazine article</span><span class="fr">Article de magazine</span></p>
+            <p class="meta">Edgar, M.R., et al.</p>
+            <a class="link" href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank" rel="noopener"><span class="en">Read online</span><span class="fr">Lire en ligne</span> →</a>
           </div>
         </li>
       </ul>
 
-      <h3 class="lang en active" style="margin-top:2rem;margin-bottom:0.5rem;color:var(--olive-dark);">🌍 What's happening to the birds</h3>
-      <h3 class="lang fr" style="margin-top:2rem;margin-bottom:0.5rem;color:var(--olive-dark);">🌍 Ce qui arrive aux oiseaux</h3>
-
-      <ul class="project-list">
+      <p class="subhead reveal"><span class="en">In review</span><span class="fr">En révision</span></p>
+      <ul class="catalogue reveal">
         <li>
-          <span class="proj-icon">🌡️</span>
-          <div class="proj-body">
-            <h4 class="lang en active">Boreal Waterbird Range Shifts</h4>
-            <h4 class="lang fr">Déplacements d'aires des oiseaux aquatiques boréaux</h4>
-            <p class="lang en active">Documenting how boreal waterfowl and shorebird distributions are shifting in response to climate change — using long-term survey data to understand which species are moving, where, and how fast. The boreal is warming faster than almost anywhere on Earth, and we don't yet have a clear picture of what that means for waterbirds.</p>
-            <p class="lang fr">Documentation des changements de distribution des sauvagines et limicoles boréaux en réponse aux changements climatiques — à partir de données de suivi à long terme pour comprendre quelles espèces se déplacent, vers où et à quelle vitesse. La forêt boréale se réchauffe plus vite que presque partout ailleurs sur Terre, et nous n'avons pas encore une image claire de ce que cela signifie pour les oiseaux aquatiques.</p>
-            <span class="proj-tag">Climate change</span>
-            <span class="proj-tag">Species distributions</span>
-            <span class="proj-tag">BAM data</span>
-          </div>
-        </li>
-        <li>
-          <span class="proj-icon">🔥</span>
-          <div class="proj-body">
-            <h4 class="lang en active">Wildfire Effects on Boreal Waterbirds</h4>
-            <h4 class="lang fr">Effets des feux de forêt sur les oiseaux aquatiques boréaux</h4>
-            <p class="lang en active">Wildfire is the dominant natural disturbance in the boreal, and its frequency and severity are increasing. This chapter asks how waterbird communities respond to fire — across species, time since burn, and fire severity — and what that means for conservation planning in a landscape that is burning more.</p>
-            <p class="lang fr">Les feux de forêt sont la perturbation naturelle dominante dans la forêt boréale, et leur fréquence et sévérité augmentent. Ce chapitre examine comment les communautés d'oiseaux aquatiques répondent aux feux — selon les espèces, le temps écoulé depuis le feu et la sévérité — et ce que cela implique pour la conservation dans un paysage qui brûle de plus en plus.</p>
-            <span class="proj-tag">Disturbance ecology</span>
-            <span class="proj-tag">Fire regimes</span>
-            <span class="proj-tag">Community composition</span>
-          </div>
-        </li>
-        <li>
-          <span class="proj-icon">💧</span>
-          <div class="proj-body">
-            <h4 class="lang en active">Waterbirds as Wetland Health Indicators</h4>
-            <h4 class="lang fr">Oiseaux aquatiques comme indicateurs de la santé des milieux humides</h4>
-            <p class="lang en active">Boreal wetlands are among the most carbon-dense ecosystems on the planet, yet we have limited tools for monitoring their ecological condition at scale. This chapter develops waterbird community metrics as practical bioindicators of wetland health across the boreal-prairie ecotone — connecting bird monitoring to broader ecosystem assessment.</p>
-            <p class="lang fr">Les milieux humides boréaux comptent parmi les écosystèmes les plus riches en carbone de la planète, mais nous disposons de peu d'outils pour surveiller leur état écologique à grande échelle. Ce chapitre développe des métriques de communautés d'oiseaux aquatiques comme bioindicateurs pratiques de la santé des milieux humides à l'écotone boréal-prairie — reliant le suivi ornithologique à l'évaluation écosystémique.</p>
-            <span class="proj-tag">Bioindicators</span>
-            <span class="proj-tag">Wetland ecology</span>
-            <span class="proj-tag">Boreal-prairie ecotone</span>
+          <div class="yr">—<small><span class="en">In review</span><span class="fr">En révision</span></small></div>
+          <div>
+            <p class="title en">LeConte's Sparrow habitat selection across peatland landscapes: a dual-framework analysis</p>
+            <p class="title fr">Sélection d'habitat du Bruant de Le Conte dans les paysages de tourbières : une analyse à double cadre</p>
+            <p class="meta en">QPAD GLM and RSPF modeling across boreal peatlands</p>
+            <p class="meta fr">Modélisation GLM QPAD et RSPF dans les tourbières boréales</p>
           </div>
         </li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <!-- TOOLS -->
-    <section id="tools">
-      <span class="section-label lang en active">Open source</span>
-      <span class="section-label lang fr">Code libre</span>
-      <h2 class="lang en active">Tools &amp; Code</h2>
-      <h2 class="lang fr">Outils et code</h2>
-
-      <div class="lang en active">
-        <p>I build open-source tools in R and Python to solve real problems in acoustic and ecological workflows. Reproducible code, transparent methods.</p>
-
-        <h3>🦅 HawkEars Validator (R Shiny)</h3>
-        <p>A lightweight Shiny app for rapid QA/QC of CNN-based bird acoustic recognizer outputs.
-        Go through clips, view spectrograms, listen to audio, and record structured validations (yes / no / unsure) to a traceable CSV.</p>
-        <a href="https://github.com/megredgar/ValidationApp" class="btn btn-primary" target="_blank" rel="noopener">View on GitHub</a>
-
-        <h3>🎛️ Acoustic Localization Pipelines (Python + R)</h3>
-        <p>Multi-species HawkEars/OpenSoundscape acoustic localization scripts (using Frontier Labs Bar-LT with localization firmware), including threshold calibration methodology for boreal species.</p>
-
-        <h3>📊 WildTrax Data Pipelines (R)</h3>
-        <p>Refactored data pipelines merging ARU and point count project exports from WildTrax, resolving type inconsistencies and building reproducible workflows for CWS-PRA analyses.</p>
-        <a href="https://github.com/megredgar" class="btn btn-secondary" target="_blank" rel="noopener">All my code on GitHub</a>
+  <!-- ───────── ABOUT ───────── -->
+  <section class="hall" id="about">
+    <div class="wrap">
+      <div class="hall-head reveal">
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>V</b></div>
+        <div><h2><span class="en">About me</span><span class="fr">À propos</span></h2></div>
       </div>
-
-      <div class="lang fr">
-        <p>Je développe des outils open source en R et Python pour résoudre de vrais problèmes dans les flux de travail acoustiques et écologiques. Code reproductible, méthodes transparentes.</p>
-
-        <h3>🦅 HawkEars Validator (R Shiny)</h3>
-        <p>Une application Shiny légère pour valider rapidement les sorties d'un recognizer acoustique CNN.
-        Parcourez les extraits, visualisez les spectrogrammes, écoutez l'audio et enregistrez des validations structurées (oui / non / incertain) dans un fichier CSV traçable.</p>
-        <a href="https://github.com/megredgar/ValidationApp" class="btn btn-primary" target="_blank" rel="noopener">Voir sur GitHub</a>
-
-        <h3>🎛️ Pipelines de localisation acoustique (Python + R)</h3>
-        <p>Scripts de localisation acoustique multi-espèces HawkEars/OpenSoundscape (utilisant le Frontier Labs Bar-LT avec micrologiciel de localisation), incluant une méthodologie de calibration des seuils pour des espèces boréales.</p>
-
-        <h3>📊 Pipelines de données WildTrax (R)</h3>
-        <p>Pipelines de données refactorisés pour fusionner les exports de projets ARU et points d'écoute de WildTrax, avec des flux de travail reproductibles pour les analyses du SCF-RPP.</p>
-        <a href="https://github.com/megredgar" class="btn btn-secondary" target="_blank" rel="noopener">Tout mon code sur GitHub</a>
-      </div>
-    </section>
-
-    <!-- PUBLICATIONS -->
-    <section id="publications">
-      <span class="section-label lang en active">My work</span>
-      <span class="section-label lang fr">Mes travaux</span>
-      <h2 class="lang en active">Publications</h2>
-      <h2 class="lang fr">Publications</h2>
-
-      <p class="lang en active">Peer-reviewed articles and popular science writing. Full list on <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
-      <p class="lang fr">Articles scientifiques et articles de vulgarisation. Liste complète sur <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
-
-      <ul class="pub-list">
-        <li>
-          <p class="pub-title lang en active">Community trophic structure within reservoirs changes in the presence of invasive Chinese mystery snail (<em>Cipangopaludina chinensis</em>) and northern crayfish (<em>Faxonius virilis</em>)</p>
-          <p class="pub-title lang fr">La structure trophique communautaire dans les réservoirs change en présence de l'escargot mystère chinois et du crayfish du Nord</p>
-          <p class="pub-meta">Edgar, M.R., Kimmel, N. &amp; Poesch, M.S. — <em>Aquatic Sciences</em>, 2025</p>
-          <div class="pub-links"><a href="https://link.springer.com/article/10.1007/s00027-025-01220-z" target="_blank" rel="noopener">🔗 Springer / DOI</a></div>
-        </li>
-        <li>
-          <p class="pub-title lang en active">The first documented occurrence and life history characteristics of the Chinese mystery snail, <em>Cipangopaludina chinensis</em> (Gray, 1834) (Mollusca: Viviparidae) in Alberta, Canada</p>
-          <p class="pub-title lang fr">Première occurrence documentée et caractéristiques du cycle de vie de l'escargot mystère chinois en Alberta, Canada</p>
-          <p class="pub-meta">Edgar, M.R., et al. — <em>BioInvasions Records</em>, 2022</p>
-          <div class="pub-links"><a href="https://www.reabic.net/journals/bir/2022/2/BIR_2022_Edgar_etal.pdf" target="_blank" rel="noopener">🔗 PDF</a></div>
-        </li>
-        <li>
-          <p class="pub-title">Edgar, M.R., et al. (2022) — <em>Nature Alberta</em> [magazine article]</p>
-          <div class="pub-links"><a href="https://online.fliphtml5.com/olrxh/qnws/#p=11" target="_blank" rel="noopener">🔗 Read online</a></div>
-        </li>
-      </ul>
-
-      <h3 class="lang en active" style="margin-top:2rem;">In preparation / In review</h3>
-      <h3 class="lang fr" style="margin-top:2rem;">En préparation / En révision</h3>
-      <ul class="pub-list">
-        <li>
-          <p class="pub-title lang en active">LeConte's Sparrow habitat selection across peatland landscapes: a dual-framework analysis</p>
-          <p class="pub-title lang fr">Sélection d'habitat du Bruant de Le Conte dans les paysages de tourbières : une analyse à double cadre</p>
-          <p class="pub-meta lang en active">In preparation — QPAD GLM and RSPF modeling across boreal peatlands</p>
-          <p class="pub-meta lang fr">En préparation — modélisation GLM QPAD et RSPF dans les tourbières boréales</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <span class="section-label lang en active">Who I am</span>
-      <span class="section-label lang fr">Qui je suis</span>
-      <h2 class="lang en active">About Me</h2>
-      <h2 class="lang fr">À propos</h2>
-
       <div class="about-grid">
-        <div>
-          <div class="lang en active">
-            <p>
-              I'm a wildlife biologist and PhD student in Dr. Erin Bayne's lab at the University of Alberta.
-              My PhD sits at the intersection of <strong>methodology</strong> and <strong>conservation</strong>:
-              the question driving everything is whether we can trust our monitoring data to reflect reality —
-              and if not, how do we fix it?
-            </p>
-            <p>
-              I'm also affiliated with Environment and Climate Change Canada's Canadian Wildlife Service Prairie Region,
-              where I contribute to the Boreal Bird Monitoring Program. I live in the Beaverhill Biosphere Reserve
-              and serve on its board — a region I care deeply about and where conservation and community intersect.
-            </p>
-            <p>
-              Outside of research, I love running, skiing, and backpacking (type 2 fun), building interactive R apps,
-              and collaborating on open science. You'll often find me outside with binoculars, wondering
-              whether that call was an Ivory-billed Woodpecker or wishful thinking 😉
-            </p>
+        <div class="reveal">
+          <div class="en">
+            <p>I'm a wildlife biologist and PhD student in Dr. Erin Bayne's lab at the University of Alberta, and a graduate student on the Boreal Avian Modelling (BAM) team. My research is driven by <strong>ecological questions</strong>: how boreal waterbirds are responding to a warming, burning landscape, and what they reveal about the condition of boreal wetlands. Answering those questions means using every source of data we have — long-running waterbird surveys and ARUs together.</p>
+            <p>I'm also a visiting researcher with Environment and Climate Change Canada's Canadian Wildlife Service, Prairie Region. I live in the Beaverhill Biosphere Reserve, a region I care deeply about and where conservation and community intersect.</p>
+            <p>Outside of research, I love running, skiing, and backpacking (type 2 fun), building interactive R apps, and collaborating on open science. You'll often find me outside with binoculars, wondering whether that call was an Ivory-billed Woodpecker or wishful thinking.</p>
           </div>
-          <div class="lang fr">
-            <p>
-              Je suis biologiste de la faune et doctorante dans le laboratoire du Dr Erin Bayne à l'Université de l'Alberta.
-              Mon doctorat se situe à l'intersection de la <strong>méthodologie</strong> et de la <strong>conservation</strong> :
-              la question centrale est de savoir si nous pouvons faire confiance à nos données de suivi pour refléter la réalité —
-              et sinon, comment y remédier.
-            </p>
-            <p>
-              Je suis également associée au Service canadien de la faune de la région des Prairies d'Environnement et Changement climatique Canada,
-              où je contribue au Programme de surveillance des oiseaux boréaux. Je vis dans la Réserve de biosphère des Beaver Hills
-              et siège à son conseil d'administration — une région qui me tient à cœur, où conservation et communauté se rejoignent.
-            </p>
-            <p>
-              En dehors de la recherche, j'aime courir, skier et randonner (plaisir de type 2), développer des applications en R,
-              et collaborer sur des projets de science ouverte. Vous me trouverez souvent dehors avec des jumelles, à me demander
-              si cet appel était bien un Pic à bec ivoire ou juste mon imagination 😉
-            </p>
+          <div class="fr">
+            <p>Je suis biologiste de la faune et doctorante dans le laboratoire du Dr Erin Bayne à l'Université de l'Alberta, et étudiante aux cycles supérieurs au sein de l'équipe du Projet de modélisation aviaire boréale (BAM). Ma recherche est guidée par des <strong>questions écologiques</strong> : comment les oiseaux aquatiques boréaux répondent à un paysage qui se réchauffe et brûle davantage, et ce qu'ils révèlent sur l'état des milieux humides boréaux. Pour y répondre, il faut utiliser toutes les sources de données disponibles — les inventaires de longue date et les ARU, ensemble.</p>
+            <p>Je suis également chercheuse invitée au Service canadien de la faune, région des Prairies, d'Environnement et Changement climatique Canada. Je vis dans la Réserve de biosphère de Beaverhill, une région qui me tient à cœur, où conservation et communauté se rejoignent.</p>
+            <p>En dehors de la recherche, j'aime courir, skier et randonner (plaisir de type 2), développer des applications en R, et collaborer sur des projets de science ouverte. Vous me trouverez souvent dehors avec des jumelles, à me demander si cet appel était bien un Pic à bec ivoire ou juste mon imagination.</p>
           </div>
         </div>
+        <aside class="aside-card reveal">
+          <h3>Affiliations</h3>
+          <ul>
+            <li><span class="en">Bayne Lab, University of Alberta</span><span class="fr">Laboratoire Bayne, Université de l'Alberta</span></li>
+            <li><span class="en">Boreal Avian Modelling (BAM) Project — Graduate student</span><span class="fr">Projet de modélisation aviaire boréale (BAM) — Étudiante aux cycles supérieurs</span></li>
+            <li><strong><span class="en">Weston Family Boreal Research Fellow</span><span class="fr">Boursière de recherche boréale de la famille Weston</span></strong> (2026–2027)</li>
+            <li><span class="en">Environment &amp; Climate Change Canada, CWS Prairie Region — Visiting researcher</span><span class="fr">Environnement et Changement climatique Canada, SCF région des Prairies — Chercheuse invitée</span></li>
+            <li><span class="en">Alberta Biodiversity Monitoring Institute (ABMI)</span><span class="fr">Institut de surveillance de la biodiversité de l'Alberta (ABMI)</span></li>
+          </ul>
+          <h3><span class="en">Datasets I use</span><span class="fr">Données que j'utilise</span></h3>
+          <ul>
+            <li><span class="en">Boreal Bird Monitoring Program (BBMP)</span><span class="fr">Programme de surveillance des oiseaux boréaux (BBMP)</span></li>
+            <li><span class="en">Waterfowl Breeding Population &amp; Habitat Survey (WBPHS)</span><span class="fr">Inventaire des populations nicheuses de sauvagine et de leur habitat (WBPHS)</span></li>
+            <li><span class="en">PRISM shorebird monitoring</span><span class="fr">Suivi des limicoles PRISM</span></li>
+            <li><a href="https://wildtrax.ca" target="_blank" rel="noopener">WildTrax</a> — <span class="en">ARU &amp; point count platform</span><span class="fr">plateforme ARU et points d'écoute</span></li>
+            <li><span class="en">BAM v5 density surfaces</span><span class="fr">Surfaces de densité BAM v5</span></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
 
+  <!-- ───────── ART ───────── -->
+  <section class="hall alt" id="art">
+    <div class="wrap">
+      <div class="hall-head reveal">
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>VI</b></div>
         <div>
-          <h3 class="lang en active" style="margin-top:0">Affiliations</h3>
-          <h3 class="lang fr" style="margin-top:0">Affiliations</h3>
-          <ul class="about-list">
-            <li>Bayne Lab, University of Alberta</li>
-            <li><strong>Weston Family Boreal Research Fellow</strong> (2026–2027)</li>
-            <li>Alberta Biodiversity Monitoring Institute (ABMI)</li>
-            <li>Environment &amp; Climate Change Canada, CWS-PRA</li>
-            <li>Boreal Avian Modelling (BAM) Project</li>
-            <li>Beaverhill Biosphere Reserve (Board member) 🌾</li>
-          </ul>
-
-          <h3 class="lang en active">Datasets I use</h3>
-          <h3 class="lang fr">Données que j'utilise</h3>
-          <ul class="about-list">
-            <li>Boreal Bird Monitoring Program (BBMP)</li>
-            <li>Waterfowl Breeding Population &amp; Habitat Survey (WBPHS)</li>
-            <li>PRISM shorebird monitoring</li>
-            <li><a href="https://wildtrax.ca" target="_blank" rel="noopener">WildTrax</a> — ARU &amp; point count platform</li>
-            <li>BAM v5 density surfaces</li>
-          </ul>
+          <h2><span class="en">Visual art</span><span class="fr">Art visuel</span></h2>
+          <p class="hall-intro en">Outside of research I'm a visual artist — follow my work on Instagram <a href="https://www.instagram.com/megahfauna/" target="_blank" rel="noopener"><strong>@megahfauna</strong></a>. Unsurprisingly, a lot of it involves birds and boreal landscapes.</p>
+          <p class="hall-intro fr">En dehors de la recherche, je suis artiste visuelle — suivez mon travail sur Instagram <a href="https://www.instagram.com/megahfauna/" target="_blank" rel="noopener"><strong>@megahfauna</strong></a>. Sans surprise, beaucoup de mes œuvres représentent des oiseaux et des paysages boréaux.</p>
         </div>
       </div>
-    </section>
-
-    <!-- ART -->
-    <section id="art">
-      <span class="section-label lang en active">Beyond the field</span>
-      <span class="section-label lang fr">Au-delà du terrain</span>
-      <h2 class="lang en active">Visual Art</h2>
-      <h2 class="lang fr">Art visuel</h2>
-
-      <div class="lang en active">
-        <p>Outside of research I'm a visual artist — follow my work on Instagram <a href="https://www.instagram.com/megahfauna/" target="_blank" rel="noopener"><strong>@megahfauna</strong></a>. Unsurprisingly, a lot of it involves birds and boreal landscapes.</p>
+      <div class="frames">
+        <figure class="frame reveal">
+          <div class="mat"><img src="images/dead.jpeg" alt="Artwork by Megan Edgar" loading="lazy" /></div>
+          <figcaption><b><span class="en">Plate I</span><span class="fr">Planche I</span></b>M. R. Edgar</figcaption>
+        </figure>
+        <figure class="frame reveal">
+          <div class="mat"><img src="images/canadalynx.jpeg" alt="Canada lynx artwork by Megan Edgar" loading="lazy" /></div>
+          <figcaption><b><span class="en">Canada Lynx</span><span class="fr">Lynx du Canada</span></b><span class="latin">Lynx canadensis</span></figcaption>
+        </figure>
+        <figure class="frame reveal">
+          <div class="mat"><img src="images/community.jpeg" alt="Community artwork by Megan Edgar" loading="lazy" /></div>
+          <figcaption><b><span class="en">Community</span><span class="fr">Communauté</span></b>M. R. Edgar</figcaption>
+        </figure>
+        <figure class="frame reveal">
+          <div class="mat"><img src="images/LBCU.jpeg" alt="Long-billed Curlew artwork by Megan Edgar" loading="lazy" /></div>
+          <figcaption><b><span class="en">Long-billed Curlew</span><span class="fr">Courlis à long bec</span></b><span class="latin">Numenius americanus</span></figcaption>
+        </figure>
       </div>
-      <div class="lang fr">
-        <p>En dehors de la recherche, je suis artiste visuelle — suivez mon travail sur Instagram <a href="https://www.instagram.com/megahfauna/" target="_blank" rel="noopener"><strong>@megahfauna</strong></a>. Sans surprise, beaucoup de mes œuvres représentent des oiseaux et des paysages boréaux.</p>
+      <div class="actions reveal" style="margin-top:40px">
+        <a href="https://www.instagram.com/megahfauna/" class="btn btn-line" target="_blank" rel="noopener">@megahfauna <span class="en">on Instagram</span><span class="fr">sur Instagram</span> →</a>
       </div>
+    </div>
+  </section>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-top:1.5rem;max-width:800px;">
-        <img src="images/dead.jpeg"       alt="Artwork by Megan Edgar"                    style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:3px solid var(--pink-dark);box-shadow:3px 3px 0 var(--pink-dark);" />
-        <img src="images/canadalynx.jpeg" alt="Canada lynx artwork by Megan Edgar"        style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:3px solid var(--pink-dark);box-shadow:3px 3px 0 var(--pink-dark);" />
-        <img src="images/community.jpeg"  alt="Community artwork by Megan Edgar"          style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:3px solid var(--pink-dark);box-shadow:3px 3px 0 var(--pink-dark);" />
-        <img src="images/LBCU.jpeg"       alt="Long-billed curlew artwork by Megan Edgar" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:3px solid var(--pink-dark);box-shadow:3px 3px 0 var(--pink-dark);" />
+  <!-- ───────── CONTACT ───────── -->
+  <section class="hall" id="contact">
+    <div class="wrap">
+      <div class="contact-card reveal">
+        <div>
+          <span class="mono" style="color:#a9b8ab"><span class="en">Say hi</span><span class="fr">Dites bonjour</span></span>
+          <h2 style="margin-top:10px"><span class="en">Let's talk boreal birds.</span><span class="fr">Parlons d'oiseaux boréaux.</span></h2>
+          <p class="en">Interested in collaborating, chatting about boreal birds, detection methods, or open science tools? I'd love to hear from you.</p>
+          <p class="fr">Intéressé(e) par une collaboration, une discussion sur les oiseaux boréaux, les méthodes de détection ou les outils de science ouverte? Je serais ravie d'échanger.</p>
+        </div>
+        <ul class="contact-links">
+          <li><a href="mailto:mredgar@ualberta.ca">mredgar@ualberta.ca <span class="mono">Email</span></a></li>
+          <li><a href="https://scholar.google.com/citations?user=Si2chmSrM84C&amp;hl=en" target="_blank" rel="noopener">Google Scholar <span class="mono">↗</span></a></li>
+          <li><a href="https://github.com/megredgar" target="_blank" rel="noopener">github.com/megredgar <span class="mono">↗</span></a></li>
+          <li><a href="https://www.linkedin.com/in/meganredgar/" target="_blank" rel="noopener">LinkedIn <span class="mono">↗</span></a></li>
+          <li><a href="https://www.instagram.com/megahfauna/" target="_blank" rel="noopener">@megahfauna <span class="mono">↗</span></a></li>
+          <li><span class="row">CV <span class="mono"><span class="en">Coming soon</span><span class="fr">Bientôt</span></span></span></li>
+        </ul>
       </div>
+    </div>
+  </section>
 
-      <a href="https://www.instagram.com/megahfauna/" class="btn btn-secondary" target="_blank" rel="noopener" style="margin-top:1.2rem;display:inline-block;">📸 @megahfauna on Instagram</a>
-    </section>
+</main>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <span class="section-label lang en active">Say hi</span>
-      <span class="section-label lang fr">Dites bonjour</span>
-      <h2 class="lang en active">Contact</h2>
-      <h2 class="lang fr">Contact</h2>
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Megan R. Edgar · University of Alberta</span>
+    <a href="#top"><span class="en">Back to top</span><span class="fr">Retour en haut</span> ↑</a>
+  </div>
+</footer>
 
-      <div class="contact-box">
-        <p class="lang en active">Interested in collaborating, chatting about boreal birds, detection methods, or open science tools? I'd love to hear from you.</p>
-        <p class="lang fr">Intéressé(e) par une collaboration, une discussion sur les oiseaux boréaux, les méthodes de détection ou les outils de science ouverte? Je serais ravie d'échanger.</p>
-        <div class="contact-method">
-          <div class="icon">✉️</div>
-          <a href="mailto:mredgar@ualberta.ca">mredgar@ualberta.ca</a>
-        </div>
-        <div class="contact-method">
-          <div class="icon">🎓</div>
-          <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&hl=en" target="_blank" rel="noopener">Google Scholar</a>
-        </div>
-        <div class="contact-method">
-          <div class="icon">💻</div>
-          <a href="https://github.com/megredgar" target="_blank" rel="noopener">github.com/megredgar</a>
-        </div>
-        <div class="contact-method">
-          <div class="icon">🔗</div>
-          <a href="https://www.linkedin.com/in/meganredgar/" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-    </section>
+<script>
+  document.documentElement.classList.add("js");
 
-  </div><!-- /#main -->
+  /* ── Language toggle ── */
+  (function () {
+    const root = document.documentElement;
+    const btn = document.getElementById("lang-toggle");
+    function setLang(l) {
+      root.setAttribute("data-lang", l);
+      root.setAttribute("lang", l);
+      btn.textContent = l === "en" ? "FR" : "EN";
+      btn.setAttribute("aria-label", l === "en" ? "Passer au français" : "Switch to English");
+      try { localStorage.setItem("mre-lang", l); } catch (e) {}
+    }
+    let saved = null;
+    try { saved = localStorage.getItem("mre-lang"); } catch (e) {}
+    setLang(saved === "fr" ? "fr" : "en");
+    btn.addEventListener("click", () => setLang(root.getAttribute("data-lang") === "en" ? "fr" : "en"));
+  })();
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 Megan R. Edgar &nbsp;|&nbsp; <a href="mailto:mredgar@ualberta.ca">mredgar@ualberta.ca</a> &nbsp;|&nbsp; University of Alberta</p>
-  </footer>
+  /* ── Diorama ── */
+  (function () {
+    const NS = "http://www.w3.org/2000/svg";
+    let seed = 11;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const el = (tag, attrs, parent) => {
+      const n = document.createElementNS(NS, tag);
+      for (const k in attrs) n.setAttribute(k, attrs[k]);
+      parent.appendChild(n); return n;
+    };
 
-  <!-- LANGUAGE TOGGLE SCRIPT — fixed -->
-  <script>
-    const toggle = document.getElementById("language-toggle");
-    let currentLang = "en";
-    toggle.addEventListener("click", () => {
-      document.querySelectorAll(".lang").forEach(el => el.classList.remove("active"));
-      document.querySelectorAll(".lang-inline").forEach(el => el.classList.remove("active"));
-      currentLang = currentLang === "en" ? "fr" : "en";
-      document.querySelectorAll(".lang." + currentLang).forEach(el => el.classList.add("active"));
-      document.querySelectorAll(".lang-inline." + currentLang).forEach(el => el.classList.add("active"));
-      toggle.textContent = currentLang === "en" ? "FR" : "EN";
+    // Black spruce silhouette: narrow, tiered, slightly ragged
+    function spruce(x, base, h, w) {
+      const t = 7 + Math.floor(rnd() * 4), R = [];
+      for (let i = 1; i <= t; i++) {
+        const y = base - h + (h * i) / t;
+        const ww = w * (0.25 + 0.75 * i / t) * (0.8 + rnd() * 0.4);
+        R.push([x + ww, y]);
+        if (i < t) R.push([x + ww * 0.3, y + 1.5]);
+      }
+      const pts = [[x, base - h - 6], ...R, [x + w * 0.07, base], [x - w * 0.07, base],
+        ...R.slice().reverse().map(([px, py]) => [2 * x - px + (rnd() - 0.5) * 2, py])];
+      return pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
+    }
+    function forest(id, base, hMin, hMax, n, color, gapFrom, gapTo) {
+      const g = document.getElementById(id);
+      for (let i = 0; i < n; i++) {
+        const x = rnd() * 1220 - 10;
+        if (x > gapFrom && x < gapTo && rnd() < 0.85) continue;
+        const h = hMin + rnd() * (hMax - hMin);
+        el("polygon", { points: spruce(x, base + rnd() * 4, h, h * 0.14), fill: color }, g);
+      }
+    }
+    forest("trees-far", 304, 26, 50, 140, "#8b998b", 700, 980);
+    forest("trees-mid", 320, 50, 95, 70, "#5e7266", 640, 1040);
+    forest("trees-near", 470, 170, 300, 9, "#26372d", 260, 1120);
+
+    // Ripples (reflection of the sun)
+    const rip = document.getElementById("ripples");
+    for (let i = 0; i < 28; i++) {
+      const y = 326 + i * 4.6, w = 90 - i * 2.2 + rnd() * 30, x = 840 - w / 2 + (rnd() - 0.5) * 40;
+      el("line", { x1: x, y1: y, x2: x + w, y2: y, "stroke-width": 1.2 + rnd() }, rip);
+    }
+    // Reeds / sedges in foreground
+    const reeds = document.getElementById("reeds");
+    for (let i = 0; i < 90; i++) {
+      const x = 380 + rnd() * 820, h = 30 + rnd() * 70, lean = (rnd() - 0.4) * 22;
+      el("path", { d: `M${x} 462 Q${x + lean * 0.3} ${462 - h * 0.6} ${x + lean} ${462 - h}`, "stroke-width": 1 + rnd() * 1.3 }, reeds);
+    }
+    // Flight of ducks (side view, wings raised)
+    const flock = document.getElementById("flock");
+    const birds = [[300,120,1],[340,134,.92],[380,148,.86],[262,138,.9],[224,156,.84],[420,160,.8],[186,172,.78]];
+    birds.forEach(([x, y, s], i) => {
+      const g = el("g", { transform: `translate(${x} ${y}) scale(${s * 1.25})` }, flock);
+      el("ellipse", { cx: 0, cy: 0, rx: 14, ry: 4.2 }, g);              // body
+      el("path", { d: "M10 -1 Q16 -3 20 -2 L25 -1 L20 0.8 Q15 1.2 10 2Z" }, g); // neck, head, bill
+      const up = i % 2 === 0;
+      el("path", { d: up ? "M-6 -2 L2 -17 L6 -2Z" : "M-6 1 L1 13 L6 1Z", opacity: .95 }, g); // wing
     });
-  </script>
+  })();
 
+  /* ── Reveal on scroll ── */
+  (function () {
+    const items = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window)) { items.forEach(i => i.classList.add("in")); return; }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    items.forEach(i => io.observe(i));
+  })();
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
