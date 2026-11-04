@@ -220,6 +220,47 @@
     .plate img { border-radius: 4px; border: 1px solid var(--rule); background: var(--paper-2); }
     .plate figcaption { font-size: 0.8rem; color: var(--ink-2); margin-top: 8px; font-style: italic; font-family: var(--serif); }
 
+    /* listening room */
+    .listen {
+      display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: center;
+      background: var(--spruce); color: var(--paper);
+      border-radius: 10px; padding: 40px;
+    }
+    .listen-shot {
+      position: relative; display: block; border-radius: 8px; overflow: hidden;
+      border: 1px solid rgba(245,241,232,.25);
+      box-shadow: 0 30px 50px -28px rgba(0,0,0,.7);
+      background: #16241c;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .listen-shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center top; }
+    .listen-shot::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(115deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 40%);
+    }
+    .listen-shot:hover { transform: translateY(-3px); box-shadow: 0 36px 60px -26px rgba(0,0,0,.8); }
+    .listen-shot .play {
+      position: absolute; right: 16px; bottom: 16px; z-index: 1;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(245,241,232,.95); color: var(--spruce);
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: .08em; text-transform: uppercase;
+      padding: 8px 14px; border-radius: 999px;
+    }
+    .listen-shot .play svg { width: 12px; height: 12px; fill: var(--spruce); }
+    .listen .mono { color: #a9b8ab; font-size: 0.68rem; }
+    .listen h3 {
+      font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.3rem);
+      line-height: 1.12; margin: 8px 0 14px;
+    }
+    .listen h3 em { color: var(--tag); font-weight: 300; }
+    .listen p { color: #cfd8cf; font-size: 0.97rem; }
+    .listen p + p { margin-top: 12px; }
+    .listen .ways { list-style: none; margin-top: 18px; border-top: 1px solid rgba(245,241,232,.2); }
+    .listen .ways li { padding: 9px 0; border-bottom: 1px solid rgba(245,241,232,.2); font-size: 0.92rem; color: #e3e9e3; }
+    .listen .ways b { font-family: var(--serif); font-weight: 500; color: var(--paper); margin-right: 6px; }
+    .listen .btn-solid { background: var(--paper); color: var(--spruce); border-color: var(--paper); margin-top: 22px; }
+    .listen .btn-solid:hover { background: var(--tag); border-color: var(--tag); color: var(--ink); }
+
     /* tools */
     .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .tool { border-top: 2px solid var(--spruce); padding-top: 18px; }
@@ -288,14 +329,14 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       html.js .reveal { opacity: 1; transform: none; transition: none; }
-      .label, .label:hover { transition: none; transform: none; }
+      .label, .label:hover, .listen-shot, .listen-shot:hover { transition: none; transform: none; }
     }
 
     /* responsive */
     @media (max-width: 960px) {
       .labels, .tools { grid-template-columns: 1fr 1fr; }
       .frames { grid-template-columns: 1fr 1fr; }
-      .hero-grid, .about-grid, .contact-card { grid-template-columns: 1fr; gap: 28px; }
+      .hero-grid, .about-grid, .contact-card, .listen { grid-template-columns: 1fr; gap: 28px; }
       .hall-head, .kit, .exhibit { grid-template-columns: 1fr; gap: 12px; }
       .kit-groups { grid-template-columns: 1fr; }
     }
@@ -309,7 +350,7 @@
       .labels, .tools { grid-template-columns: 1fr; }
       .exhibit { padding: 22px 20px; }
       .catalogue li { grid-template-columns: 1fr; gap: 6px; }
-      .contact-card { padding: 30px 22px; }
+      .contact-card, .listen { padding: 30px 22px; }
       .spec-tag { display: none; }
       .case-label { position: static; max-width: none; border: 0; border-top: 1px solid var(--rule); border-radius: 0; box-shadow: none; }
     }
@@ -323,6 +364,7 @@
     <nav class="nav" aria-label="Sections">
       <a href="#research"><span class="en">Research</span><span class="fr">Recherche</span></a>
       <a href="#projects"><span class="en">Projects</span><span class="fr">Projets</span></a>
+      <a href="#listen"><span class="en">Listen</span><span class="fr">Écouter</span></a>
       <a href="#tools"><span class="en">Tools</span><span class="fr">Outils</span></a>
       <a href="#publications">Publications</a>
       <a href="#about"><span class="en">About</span><span class="fr">À propos</span></a>
@@ -566,11 +608,46 @@
     </div>
   </section>
 
-  <!-- ───────── TOOLS ───────── -->
-  <section class="hall" id="tools">
+  <!-- ───────── LISTEN ───────── -->
+  <section class="hall" id="listen">
     <div class="wrap">
       <div class="hall-head reveal">
         <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>III</b></div>
+        <div>
+          <h2><span class="en">The listening room</span><span class="fr">La salle d'écoute</span></h2>
+          <p class="hall-intro en">Most people will never stand in a boreal fen at 4 a.m. in June. But thousands of ARUs have — so I built a place where <strong>anyone can hear what the boreal sounds like</strong>.</p>
+          <p class="hall-intro fr">La plupart des gens ne se tiendront jamais dans une tourbière boréale à 4 h du matin en juin. Mais des milliers d'ARU l'ont fait — alors j'ai créé un endroit où <strong>tout le monde peut entendre la forêt boréale</strong>.</p>
+        </div>
+      </div>
+
+      <div class="listen reveal">
+        <a class="listen-shot" href="https://megredgar.github.io/boreal-soundscape/" target="_blank" rel="noopener">
+          <img src="images/boreal%20listening.png" alt="Screenshot of the Boreal Soundscape Atlas: recordings shown as points of light across the boreal" loading="lazy" />
+          <span class="play"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg><span class="en">Listen</span><span class="fr">Écouter</span></span>
+        </a>
+        <div>
+          <span class="mono"><span class="en">Interactive exhibit</span><span class="fr">Exposition interactive</span></span>
+          <h3>Boreal Soundscape <em>Atlas</em></h3>
+          <p class="en">Each point of light is thirty seconds from an ARU somewhere between the Mackenzie and Hudson Bay. Search for one species' vocalization, or just listen to the ambient sounds of the boreal!</p>
+          <p class="fr">Chaque point lumineux représente trente secondes captées par une ARU quelque part entre le Mackenzie et la baie d'Hudson. Cherchez la vocalisation d'une espèce, ou écoutez simplement l'ambiance sonore de la forêt boréale!</p>
+          <p class="en">I've been enjoying <strong style="color:var(--paper)">Take a Journey</strong> and playing it in the background while I work.</p>
+          <p class="fr">J'adore le mode <strong style="color:var(--paper)">Take a Journey</strong>, que je laisse jouer en arrière-plan pendant que je travaille.</p>
+          <ul class="ways">
+            <li><b><span class="en">Map</span><span class="fr">Carte</span></b><span class="en">every clip where its ARU stood</span><span class="fr">chaque extrait là où se trouvait son ARU</span></li>
+            <li><b><span class="en">Season clock</span><span class="fr">Horloge saisonnière</span></b><span class="en">the breeding season folded into a spiral, May to August</span><span class="fr">la saison de nidification en spirale, de mai à août</span></li>
+            <li><b><span class="en">Community</span><span class="fr">Communauté</span></b><span class="en">clips with similar species grouped together</span><span class="fr">les extraits aux espèces semblables regroupés</span></li>
+          </ul>
+          <a class="btn btn-solid" href="https://megredgar.github.io/boreal-soundscape/" target="_blank" rel="noopener"><span class="en">Step inside</span><span class="fr">Entrer</span> →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── TOOLS ───────── -->
+  <section class="hall alt" id="tools">
+    <div class="wrap">
+      <div class="hall-head reveal">
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>IV</b></div>
         <div>
           <h2><span class="en">Tools &amp; code</span><span class="fr">Outils et code</span></h2>
           <p class="hall-intro en">I build open-source tools in R and Python to solve real problems in acoustic and ecological workflows. Reproducible code, transparent methods.</p>
@@ -603,10 +680,10 @@
   </section>
 
   <!-- ───────── PUBLICATIONS ───────── -->
-  <section class="hall alt" id="publications">
+  <section class="hall" id="publications">
     <div class="wrap">
       <div class="hall-head reveal">
-        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>IV</b></div>
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>V</b></div>
         <div>
           <h2>Publications</h2>
           <p class="hall-intro en">Peer-reviewed articles and popular science writing. Full list on <a href="https://scholar.google.com/citations?user=Si2chmSrM84C&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
@@ -667,10 +744,10 @@
   </section>
 
   <!-- ───────── ABOUT ───────── -->
-  <section class="hall" id="about">
+  <section class="hall alt" id="about">
     <div class="wrap">
       <div class="hall-head reveal">
-        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>V</b></div>
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>VI</b></div>
         <div><h2><span class="en">About me</span><span class="fr">À propos</span></h2></div>
       </div>
       <div class="about-grid">
@@ -709,10 +786,10 @@
   </section>
 
   <!-- ───────── ART ───────── -->
-  <section class="hall alt" id="art">
+  <section class="hall" id="art">
     <div class="wrap">
       <div class="hall-head reveal">
-        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>VI</b></div>
+        <div class="hall-no mono"><span class="en">Hall</span><span class="fr">Salle</span><b>VII</b></div>
         <div>
           <h2><span class="en">Visual art</span><span class="fr">Art visuel</span></h2>
           <p class="hall-intro en">Outside of research I'm a visual artist — follow my work on Instagram <a href="https://www.instagram.com/megahfauna/" target="_blank" rel="noopener"><strong>@megahfauna</strong></a>. Unsurprisingly, a lot of it involves birds and boreal landscapes.</p>
@@ -744,7 +821,7 @@
   </section>
 
   <!-- ───────── CONTACT ───────── -->
-  <section class="hall" id="contact">
+  <section class="hall alt" id="contact">
     <div class="wrap">
       <div class="contact-card reveal">
         <div>
